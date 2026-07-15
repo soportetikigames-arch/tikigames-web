@@ -20,7 +20,10 @@ exports.handler = async function (event) {
   }
 
   try {
-    const { reference, amountInCents, currency } = JSON.parse(event.body || '{}');
+    const rawBody = event.isBase64Encoded
+      ? Buffer.from(event.body || '', 'base64').toString('utf8')
+      : (event.body || '{}');
+    const { reference, amountInCents, currency } = JSON.parse(rawBody);
 
     if (!reference || !amountInCents || !currency) {
       return { statusCode: 400, headers, body: JSON.stringify({ error: 'Faltan parámetros (reference, amountInCents, currency)' }) };
