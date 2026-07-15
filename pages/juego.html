@@ -9,8 +9,8 @@
   <link rel="stylesheet" href="../css/components.css" />
   <link rel="stylesheet" href="../css/animations.css" />
   <link rel="icon" href="../imagenes/logo/favicon.png" />
-  <!-- Wompi Widget -->
-  <script src="https://checkout.wompi.co/widget.js"></script>
+  <!-- ePayco Checkout -->
+  <script src="https://checkout.epayco.co/checkout.js"></script>
   <!-- PayPal SDK (Hosted Buttons) -->
   <script src="https://www.paypal.com/sdk/js?client-id=BAAz58YwiFdik4ODXr981asRsD709m_V4FUxgD73zckbYDBFHeUBKeJVZ8aWYMRHktTETWWhmEMKAz3zz8&components=hosted-buttons&disable-funding=venmo&currency=USD"></script>
   <!-- EmailJS (envío automático de correos) -->
@@ -436,15 +436,15 @@
           <div id="paypal-container-permanente" style="min-height:50px;display:none;"></div>
         </div>
 
-        <!-- Bloque Tarjeta — Wompi + transferencia manual -->
+        <!-- Bloque Tarjeta — ePayco + transferencia manual -->
         <div id="card-info" style="display:none;margin-bottom:20px;">
           <div style="background:rgba(0,240,255,0.06);border:1px solid rgba(0,240,255,0.2);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:14px;">
             <p style="font-size:12.5px;color:var(--text-gray);line-height:1.6;margin:0;">
-              Paga de forma segura con tarjeta de crédito o débito a través de <strong style="color:white;">Wompi</strong>. El dinero se deposita directamente en la cuenta Bancolombia de TikiGames.
+              Paga de forma segura con tarjeta de crédito o débito a través de <strong style="color:white;">ePayco</strong>. El dinero se deposita directamente en la cuenta Bancolombia de TikiGames.
             </p>
           </div>
-          <button class="btn btn-primary btn-lg" style="width:100%;justify-content:center;margin-bottom:14px;" onclick="pagarConWompi()">
-            Pagar con tarjeta (Wompi)
+          <button class="btn btn-primary btn-lg" style="width:100%;justify-content:center;margin-bottom:14px;" onclick="pagarConEpayco()">
+            Pagar con tarjeta (ePayco)
           </button>
 
           <details>
@@ -550,14 +550,14 @@
       <button class="btn btn-outline" style="margin:0 auto;" onclick="cerrarYReiniciar()">Cerrar</button>
     </div>
 
-    <!-- STEP 4: Confirmación Wompi -->
-    <div id="checkout-step-wompi" style="display:none;text-align:center;padding:20px 0;">
+    <!-- STEP 4: Confirmación ePayco -->
+    <div id="checkout-step-epayco" style="display:none;text-align:center;padding:20px 0;">
       <div style="width:72px;height:72px;border-radius:50%;background:rgba(0,240,255,0.08);border:2px solid var(--cyan);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
         <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
       <h2 style="color:var(--cyan);margin-bottom:8px;">¡Pago aprobado!</h2>
       <p style="color:var(--text-gray);line-height:1.7;margin-bottom:20px;">
-        Tu pago con tarjeta fue procesado exitosamente por Wompi. En las próximas horas recibirás el juego y los archivos en tu correo.
+        Tu pago con tarjeta fue procesado exitosamente por ePayco. En las próximas horas recibirás el juego y los archivos en tu correo.
       </p>
       <button class="btn btn-outline" style="margin:0 auto;" onclick="cerrarYReiniciar()">Cerrar</button>
     </div>
@@ -649,8 +649,8 @@
 }
 .trial-btn-wrap:hover .side-tooltip { opacity:1; transform:translateX(-50%) translateY(0); }
 
-/* Forzar que cualquier overlay/iframe de Wompi permita scroll completo, incluso en pantallas cortas */
-iframe[src*="wompi"], div[class*="wompi"], div[id*="wompi"] {
+/* Forzar que cualquier overlay/iframe de pasarelas de pago permita scroll completo, incluso en pantallas cortas */
+iframe[src*="epayco"], div[class*="epayco"], div[id*="epayco"] {
   max-height: 100vh !important;
   overflow-y: auto !important;
 }
@@ -804,7 +804,7 @@ function enviarComprobante(nombre, email, metodo) {
   const info   = PLAN_INFO[currentPlan] || PLAN_INFO.mensual;
   const fecha  = new Date().toLocaleDateString('es-CO', { year:'numeric', month:'long', day:'numeric' });
   const hora   = new Date().toLocaleTimeString('es-CO', { hour:'2-digit', minute:'2-digit' });
-  const metodoTexto = metodo === 'paypal' ? 'PayPal' : metodo === 'wompi' ? 'Tarjeta (Wompi)' : 'Transferencia Bancolombia';
+  const metodoTexto = metodo === 'paypal' ? 'PayPal' : metodo === 'epayco' ? 'Tarjeta (ePayco)' : 'Transferencia Bancolombia';
   const notaVigencia = currentPlan === 'permanente'
     ? 'Tu acceso es permanente: no necesitas volver a pagar por este juego.'
     : 'Tu membresía queda activa por 30 días desde la fecha de este pago. Para mantener el acceso, deberás repetir el pago de $33 USD antes de que se cumpla el mes, ingresando nuevamente a tikigames.shop.';
@@ -894,58 +894,68 @@ function procesarPago() {
   }
 }
 
-// ─── Pagar con tarjeta vía Wompi ──────────────────
-async function pagarConWompi() {
+// ─── Pagar con tarjeta vía ePayco ──────────────────
+// Reemplaza este valor por tu llave pública real de ePayco (Dashboard → Configuración → Llaves)
+const EPAYCO_PUBLIC_KEY = 'fbdeb364284d433f7ed1c75decdbcc30';
+
+function pagarConEpayco() {
   const datos = validarDatosPersonales();
   if (!datos) { showToast('Completa nombre y correo para continuar'); return; }
-  if (typeof WidgetCheckout === 'undefined') { showToast('No se pudo cargar Wompi, intenta de nuevo'); return; }
+  if (typeof ePayco === 'undefined') { showToast('No se pudo cargar ePayco, intenta de nuevo'); return; }
+  if (EPAYCO_PUBLIC_KEY.startsWith('TU_')) { showToast('ePayco aún no está configurado', 'Falta la llave pública'); return; }
 
-  const info      = PLAN_INFO[currentPlan] || PLAN_INFO.mensual;
-  const reference = 'tikigames-' + currentPlan + '-' + Date.now();
-  const amountInCents = info.cop * 100;
+  const info    = PLAN_INFO[currentPlan] || PLAN_INFO.mensual;
+  const invoice = 'tikigames-' + currentPlan + '-' + Date.now();
 
-  // Pedir la firma de integridad a nuestra función segura antes de abrir el widget
-  let signature = null;
-  try {
-    const resp = await fetch('/.netlify/functions/wompi-signature', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ reference, amountInCents, currency: 'COP' }),
-    });
-    const data = await resp.json();
-    if (!resp.ok || !data.signature) throw new Error(data.error || 'Firma no generada');
-    signature = data.signature;
-  } catch (err) {
-    console.error('Error obteniendo firma de integridad:', err);
-    showToast('No se pudo iniciar el pago', 'Intenta de nuevo en unos segundos');
-    return;
-  }
+  // Guardamos los datos para recuperarlos cuando ePayco regrese a esta página
+  sessionStorage.setItem('epayco_pending', JSON.stringify({ nombre: datos.nombre, email: datos.email, plan: currentPlan }));
 
-  const checkout = new WidgetCheckout({
-    currency: 'COP',
-    amountInCents: amountInCents,
-    reference: reference,
-    publicKey: 'pub_prod_5lLxgCo5PtfJa2rh7w45pwAA5Jmj53pA', // Llave de PRODUCCIÓN — pagos reales
-    signature: signature,
-    redirectUrl: 'https://tikigames.shop/pages/juego.html',
+  const handler = ePayco.checkout.configure({
+    key: EPAYCO_PUBLIC_KEY,
+    test: true // ⚠️ Modo de pruebas — cambiar a false cuando ePayco apruebe la cuenta (pagos reales)
   });
 
-  // Liberar el scroll del body y posicionar arriba para que el widget de Wompi se vea completo
   document.body.style.overflow = '';
-  window.scrollTo({ top: 0, behavior: 'instant' });
 
-  checkout.open(function (result) {
-    document.body.style.overflow = 'hidden'; // nuestro modal sigue abierto detrás
-    const transaction = result.transaction;
-    if (transaction && transaction.status === 'APPROVED') {
-      document.getElementById('checkout-step-1').style.display = 'none';
-      document.getElementById('checkout-step-wompi').style.display = 'block';
-      setTimeout(() => enviarComprobante(datos.nombre, datos.email, 'wompi'), 500);
-    } else {
-      showToast('El pago no se completó. Intenta nuevamente.');
-    }
+  handler.open({
+    name: 'Mundialito Torneo',
+    description: currentPlan === 'permanente' ? 'Acceso permanente' : 'Membresía mensual',
+    invoice: invoice,
+    currency: 'cop',
+    amount: String(info.cop),
+    tax_base: '0',
+    tax: '0',
+    country: 'co',
+    lang: 'es',
+    external: 'false',
+    response: window.location.origin + window.location.pathname,
+    email_billing: datos.email,
+    name_billing: datos.nombre,
   });
 }
+
+// ─── Detectar el regreso exitoso desde ePayco ──────
+function verificarRetornoEpayco() {
+  const params = new URLSearchParams(window.location.search);
+  const respuesta = params.get('x_response') || params.get('x_transaction_state');
+  const pendienteRaw = sessionStorage.getItem('epayco_pending');
+  if (!respuesta || !pendienteRaw) return;
+
+  const pendiente = JSON.parse(pendienteRaw);
+  currentPlan = pendiente.plan;
+
+  if (respuesta.toLowerCase() === 'aceptada' || respuesta.toLowerCase() === 'approved') {
+    openModal('modal-checkout');
+    document.getElementById('checkout-step-1').style.display = 'none';
+    document.getElementById('checkout-step-epayco').style.display = 'block';
+    enviarComprobante(pendiente.nombre, pendiente.email, 'epayco');
+  } else {
+    showToast('El pago no se completó', 'Puedes intentarlo de nuevo');
+  }
+  sessionStorage.removeItem('epayco_pending');
+  window.history.replaceState({}, document.title, window.location.pathname);
+}
+document.addEventListener('DOMContentLoaded', verificarRetornoEpayco);
 
 // ─── Solicitud de prueba gratis dentro del checkout ──
 function solicitarPruebaCheckout() {
@@ -992,7 +1002,7 @@ Quedo atento a la activación.`;
 // ─── Reiniciar modal ─────────────────────────────
 function cerrarYReiniciar() {
   document.getElementById('checkout-step-1').style.display = 'block';
-  ['checkout-step-2','checkout-step-3','checkout-step-wompi','checkout-step-trial']
+  ['checkout-step-2','checkout-step-3','checkout-step-epayco','checkout-step-trial']
     .forEach(id => { document.getElementById(id).style.display = 'none'; });
   ['buyer-name','buyer-email','checkout-trial-tiktok']
     .forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
