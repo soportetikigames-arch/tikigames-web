@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comunidad — TikiGames</title>
+    <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/navbar.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/animations.css" />
+  <link rel="icon" href="../imagenes/logo/favicon.png" />
+</head>
+<body>
+
+<canvas id="particles-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a href="../index.html" class="nav-logo">
+    <img src="../imagenes/logo/logo.png" alt="TikiGames" />
+  </a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Inicio</a></li>
+    <li><a href="catalogo.html">Juegos</a></li>
+    <li><a href="comunidad.html" class="active">Comunidad</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="nav-search-btn" data-search-open>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    </button>
+    <button class="btn btn-primary" onclick="openModal('modal-login')">Iniciar Sesión</button>
+  </div>
+  <button class="hamburger"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-nav">
+  <a href="../index.html">Inicio</a>
+  <a href="catalogo.html">Juegos</a>
+  <a href="comunidad.html">Comunidad</a>
+</div>
+
+<!-- HERO -->
+<div style="padding-top:70px;position:relative;overflow:hidden;min-height:280px;display:flex;align-items:center;">
+  <div style="position:absolute;inset:0;background:url('../imagenes/banners/banner_contacto.jpg') center/cover;filter:brightness(0.2);"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,240,255,0.08),rgba(255,0,80,0.08));"></div>
+  <div style="position:absolute;bottom:0;left:0;right:0;height:100px;background:linear-gradient(to top,var(--bg-primary),transparent);"></div>
+  <div style="position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:60px 40px;width:100%;">
+    <h1 style="font-family:'Orbitron',monospace;font-size:clamp(32px,5vw,64px);font-weight:900;margin-bottom:12px;">COMUNIDAD</h1>
+    <p style="color:var(--text-gray);font-size:17px;max-width:480px;">Únete a miles de streamers y espectadores que ya juegan con TikiGames en TikTok Live.</p>
+  </div>
+</div>
+
+<!-- QUIÉNES SOMOS -->
+<div id="quienes-somos" class="section" style="position:relative;z-index:1;padding-bottom:0;">
+  <div class="section-header reveal">
+    <h2 class="section-title">Quiénes somos</h2>
+  </div>
+  <div class="reveal" style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-lg);padding:40px;margin-bottom:0;">
+    <div>
+      <span class="badge badge-red" style="margin-bottom:16px;display:inline-block;">Nuestra misión</span>
+      <h3 style="font-family:'Rajdhani',sans-serif;font-size:28px;font-weight:700;letter-spacing:1px;margin-bottom:16px;line-height:1.2;">Transformamos los TikTok Lives en experiencias competitivas e inolvidables.</h3>
+      <p style="color:var(--text-gray);line-height:1.8;margin-bottom:16px;">En <strong style="color:white;">TikiGames</strong> desarrollamos juegos interactivos diseñados exclusivamente para creadores de contenido en TikTok Live. Entendemos que el streaming es mucho más que transmitir: es construir comunidad, generar engagement real y diferenciarse en un ecosistema cada vez más competitivo.</p>
+      <p style="color:var(--text-gray);line-height:1.8;margin-bottom:16px;">Nuestros productos están pensados tanto para el streamer que lleva años frente a su audiencia como para quien recién da sus primeros pasos en el mundo del contenido digital. No necesitas ser un experto técnico: nuestros juegos se integran de forma sencilla con TikFinity y funcionan desde el primer minuto.</p>
+      <p style="color:var(--text-gray);line-height:1.8;">Creemos que cada transmisión puede convertirse en un evento. Que cada espectador puede ser protagonista. Y que la mejor forma de crecer en TikTok es dándole a tu audiencia una razón para quedarse.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);padding:24px;border-left:3px solid var(--red);">
+        <div style="font-family:'Orbitron',monospace;font-size:28px;font-weight:700;color:var(--red);margin-bottom:4px;">100%</div>
+        <div style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:16px;margin-bottom:4px;">Interactivo</div>
+        <div style="color:var(--text-dim);font-size:13px;">Tu audiencia participa en tiempo real, no solo observa.</div>
+      </div>
+      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);padding:24px;border-left:3px solid var(--cyan);">
+        <div style="font-family:'Orbitron',monospace;font-size:28px;font-weight:700;color:var(--cyan);margin-bottom:4px;">+5</div>
+        <div style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:16px;margin-bottom:4px;">Años en el ecosistema TikTok</div>
+        <div style="color:var(--text-dim);font-size:13px;">Conocemos la plataforma y lo que necesitan los creadores.</div>
+      </div>
+      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);padding:24px;border-left:3px solid var(--purple);">
+        <div style="font-family:'Orbitron',monospace;font-size:28px;font-weight:700;color:var(--purple);margin-bottom:4px;">Todos</div>
+        <div style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:16px;margin-bottom:4px;">Los niveles de experiencia</div>
+        <div style="color:var(--text-dim);font-size:13px;">Desde principiantes hasta streamers consolidados.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider" style="margin:48px 40px;"></div>
+
+<!-- CANALES DE COMUNIDAD -->
+<div class="section" style="position:relative;z-index:1;padding-top:0;">
+
+  <div class="section-header reveal">
+    <h2 class="section-title">Únete a nuestra comunidad</h2>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-bottom:64px;" class="reveal">
+
+    <a href="https://tiktok.com/@tikigames" target="_blank" style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-md);padding:28px;display:flex;align-items:center;gap:20px;transition:var(--transition);text-decoration:none;" onmouseover="this.style.borderColor='var(--red)';this.style.boxShadow='var(--shadow-red)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow=''">
+      <div style="width:48px;height:48px;border-radius:12px;background:rgba(255,0,80,0.12);border:1px solid rgba(255,0,80,0.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/></svg>
+      </div>
+      <div>
+        <div style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:18px;margin-bottom:4px;">TikTok</div>
+        <div style="color:var(--text-dim);font-size:13px;">@tikigames · Lives y torneos</div>
+      </div>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-dim)" stroke-width="2" style="margin-left:auto;flex-shrink:0;"><path d="m9 18 6-6-6-6"/></svg>
+    </a>
+
+    <a href="https://discord.gg/FN569qsh2X" target="_blank" style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-md);padding:28px;display:flex;align-items:center;gap:20px;transition:var(--transition);text-decoration:none;" onmouseover="this.style.borderColor='#5865F2';this.style.boxShadow='0 0 20px rgba(88,101,242,0.2)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow=''">
+      <div style="width:48px;height:48px;border-radius:12px;background:rgba(88,101,242,0.12);border:1px solid rgba(88,101,242,0.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="#5865F2"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+      </div>
+      <div>
+        <div style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:18px;margin-bottom:4px;">Discord</div>
+        <div style="color:var(--text-dim);font-size:13px;">Comunidad activa · 12K+ miembros</div>
+      </div>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-dim)" stroke-width="2" style="margin-left:auto;flex-shrink:0;"><path d="m9 18 6-6-6-6"/></svg>
+    </a>
+
+    <a href="mailto:soporte.tikigames@gmail.com" style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-md);padding:28px;display:flex;align-items:center;gap:20px;transition:var(--transition);text-decoration:none;" onmouseover="this.style.borderColor='var(--cyan)';this.style.boxShadow='var(--shadow-cyan)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow=''">
+      <div style="width:48px;height:48px;border-radius:12px;background:rgba(0,240,255,0.08);border:1px solid rgba(0,240,255,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+      </div>
+      <div>
+        <div style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:18px;margin-bottom:4px;">Email</div>
+        <div style="color:var(--text-dim);font-size:13px;">soporte.tikigames@gmail.com</div>
+      </div>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-dim)" stroke-width="2" style="margin-left:auto;flex-shrink:0;"><path d="m9 18 6-6-6-6"/></svg>
+    </a>
+
+  </div>
+
+  <div class="divider" style="margin:0 0 64px;"></div>
+
+  <!-- Formulario + FAQ -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;">
+
+    <!-- Formulario -->
+    <div class="reveal">
+      <h2 class="section-title" style="margin-bottom:8px;">Envíanos un mensaje</h2>
+      <p style="color:var(--text-gray);margin-bottom:32px;">Respondemos en menos de 24 horas.</p>
+
+      <div style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px;">
+        <div class="form-group">
+          <label>Nombre completo</label>
+          <input type="text" class="form-control" id="c-name" placeholder="Tu nombre" />
+        </div>
+        <div class="form-group">
+          <label>Correo electrónico</label>
+          <input type="email" class="form-control" id="c-email" placeholder="tu@correo.com" />
+        </div>
+        <div class="form-group">
+          <label>Asunto</label>
+          <select class="form-control" id="c-subject">
+            <option value="">Selecciona un asunto</option>
+            <option>Soporte técnico</option>
+            <option>Pagos y facturación</option>
+            <option>Quiero ser parte de la comunidad</option>
+            <option>Propuesta comercial</option>
+            <option>Otro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Mensaje</label>
+          <textarea class="form-control" id="c-msg" rows="5" placeholder="Cuéntanos en qué podemos ayudarte..." style="resize:vertical;"></textarea>
+        </div>
+        <button class="btn btn-primary btn-lg" style="width:100%;justify-content:center;" onclick="enviarMensaje()">
+          Enviar mensaje
+        </button>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="reveal">
+      <h2 class="section-title" style="margin-bottom:8px;">Preguntas frecuentes</h2>
+      <p style="color:var(--text-gray);margin-bottom:32px;">Todo lo que necesitas saber.</p>
+
+      <div style="display:flex;flex-direction:column;gap:8px;" id="faq-list">
+
+        <div class="faq-item" style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;">
+          <button onclick="toggleFaq(this)" style="width:100%;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:600;color:white;text-align:left;background:none;cursor:pointer;">
+            ¿Cómo funciona el pago?
+            <svg class="faq-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition:var(--transition);flex-shrink:0;"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-body" style="max-height:0;overflow:hidden;transition:max-height 0.4s ease;padding:0 20px;">
+            <p style="color:var(--text-gray);font-size:14px;padding-bottom:18px;line-height:1.7;">Aceptamos tarjetas débito/crédito, PSE, Nequi y Daviplata a través de Mercado Pago. El acceso al juego es inmediato tras la confirmación del pago.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" id="faq-reembolso" style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;scroll-margin-top:90px;">
+          <button onclick="toggleFaq(this)" style="width:100%;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:600;color:white;text-align:left;background:none;cursor:pointer;">
+            ¿Puedo pedir reembolso?
+            <svg class="faq-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition:var(--transition);flex-shrink:0;"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-body" style="max-height:0;overflow:hidden;transition:max-height 0.4s ease;padding:0 20px;">
+            <p style="color:var(--text-gray);font-size:14px;padding-bottom:18px;line-height:1.7;">No. Una vez realizado el pago no se harán reembolsos. Te recomendamos leer bien la descripción del juego antes de comprar. Si tienes dudas, contáctanos antes de adquirirlo.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;">
+          <button onclick="toggleFaq(this)" style="width:100%;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:600;color:white;text-align:left;background:none;cursor:pointer;">
+            ¿Cómo integro el juego a mi TikTok Live?
+            <svg class="faq-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition:var(--transition);flex-shrink:0;"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-body" style="max-height:0;overflow:hidden;transition:max-height 0.4s ease;padding:0 20px;">
+            <p style="color:var(--text-gray);font-size:14px;padding-bottom:18px;line-height:1.7;">Para vincular algunos juegos a tu TikTok Live necesitarás tener una cuenta activa en <strong style="color:var(--cyan);">TikFinity</strong>. Una vez tengas tu usuario, recibirás instrucciones detalladas para conectar el juego a tu transmisión en minutos.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;">
+          <button onclick="toggleFaq(this)" style="width:100%;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:600;color:white;text-align:left;background:none;cursor:pointer;">
+            ¿Cuántos espectadores pueden participar?
+            <svg class="faq-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition:var(--transition);flex-shrink:0;"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-body" style="max-height:0;overflow:hidden;transition:max-height 0.4s ease;padding:0 20px;">
+            <p style="color:var(--text-gray);font-size:14px;padding-bottom:18px;line-height:1.7;">No hay límite. Todos los espectadores de tu Live pueden participar al mismo tiempo votando y comentando. Cuantos más, más emocionante.</p>
+          </div>
+        </div>
+
+        <!-- FAQ TikFinity — qué es -->
+        <div class="faq-item" id="faq-tikfinity" style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;scroll-margin-top:90px;">
+          <button onclick="toggleFaq(this)" style="width:100%;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:600;color:white;text-align:left;background:none;cursor:pointer;">
+            ¿Qué es TikFinity y por qué lo necesito?
+            <svg class="faq-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition:var(--transition);flex-shrink:0;"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-body" style="max-height:0;overflow:hidden;transition:max-height 0.4s ease;padding:0 20px;">
+            <div style="padding-bottom:20px;">
+              <p style="color:var(--text-gray);font-size:14px;line-height:1.8;margin-bottom:12px;">
+                <strong style="color:var(--cyan);">TikFinity</strong> es una plataforma externa que actúa como puente entre tu TikTok Live y los juegos de TikiGames. Permite leer los comentarios, regalos y eventos de tu transmisión en tiempo real para que tu audiencia pueda interactuar directamente con el juego mientras estás en vivo.
+              </p>
+              <p style="color:var(--text-gray);font-size:14px;line-height:1.8;margin-bottom:12px;">
+                La gran mayoría de los juegos que desarrollamos en TikiGames requieren estar vinculados a TikFinity para funcionar correctamente durante tus lives. Sin esta integración, los espectadores no podrán participar ni votar dentro del juego.
+              </p>
+              <div style="background:rgba(255,0,80,0.06);border-left:3px solid var(--red);border-radius:0 6px 6px 0;padding:12px 16px;">
+                <p style="color:white;font-size:13px;font-weight:600;margin:0;">Es obligatorio tener una cuenta activa en TikFinity para usar la mayoría de los juegos de TikiGames durante tus transmisiones en vivo.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ TikFinity — cómo crear cuenta -->
+        <div class="faq-item" id="faq-tikfinity-cuenta" style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;scroll-margin-top:90px;">
+          <button onclick="toggleFaq(this)" style="width:100%;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:600;color:white;text-align:left;background:none;cursor:pointer;">
+            ¿Cómo creo una cuenta en TikFinity?
+            <svg class="faq-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition:var(--transition);flex-shrink:0;"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-body" style="max-height:0;overflow:hidden;transition:max-height 0.4s ease;padding:0 20px;">
+            <div style="padding-bottom:20px;">
+              <p style="color:var(--text-gray);font-size:14px;line-height:1.8;margin-bottom:16px;">Crear una cuenta en TikFinity es gratuito y toma menos de 2 minutos. Sigue estos pasos:</p>
+              <div style="display:flex;flex-direction:column;gap:12px;">
+                <div style="display:flex;gap:12px;align-items:flex-start;">
+                  <div style="width:28px;height:28px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:13px;flex-shrink:0;">1</div>
+                  <div>
+                    <p style="color:white;font-size:14px;font-weight:600;margin-bottom:2px;">Ve a tikfinity.com</p>
+                    <p style="color:var(--text-gray);font-size:13px;">Abre <a href="https://tikfinity.com" target="_blank" style="color:var(--cyan);">tikfinity.com</a> desde tu navegador.</p>
+                  </div>
+                </div>
+                <div style="display:flex;gap:12px;align-items:flex-start;">
+                  <div style="width:28px;height:28px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:13px;flex-shrink:0;">2</div>
+                  <div>
+                    <p style="color:white;font-size:14px;font-weight:600;margin-bottom:2px;">Inicia sesión con TikTok</p>
+                    <p style="color:var(--text-gray);font-size:13px;">Haz clic en "Login with TikTok" y autoriza el acceso con tu cuenta de TikTok. No necesitas correo ni contraseña adicional.</p>
+                  </div>
+                </div>
+                <div style="display:flex;gap:12px;align-items:flex-start;">
+                  <div style="width:28px;height:28px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:13px;flex-shrink:0;">3</div>
+                  <div>
+                    <p style="color:white;font-size:14px;font-weight:600;margin-bottom:2px;">Conecta tu cuenta</p>
+                    <p style="color:var(--text-gray);font-size:13px;">Una vez dentro, verás tu panel de TikFinity. Cuando inicies un Live en TikTok, TikFinity lo detectará automáticamente.</p>
+                  </div>
+                </div>
+                <div style="display:flex;gap:12px;align-items:flex-start;">
+                  <div style="width:28px;height:28px;border-radius:50%;background:var(--cyan);display:flex;align-items:center;justify-content:center;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:13px;flex-shrink:0;color:var(--bg-primary);">4</div>
+                  <div>
+                    <p style="color:white;font-size:14px;font-weight:600;margin-bottom:2px;">Vincula tu juego TikiGames</p>
+                    <p style="color:var(--text-gray);font-size:13px;">Sigue las instrucciones que recibirás por correo tras tu compra para activar el juego dentro de TikFinity.</p>
+                  </div>
+                </div>
+              </div>
+              <div style="margin-top:16px;background:rgba(0,240,255,0.06);border:1px solid rgba(0,240,255,0.2);border-radius:6px;padding:12px 16px;">
+                <p style="color:var(--text-gray);font-size:13px;margin:0;">¿Tienes problemas al registrarte? Escríbenos a <strong style="color:var(--cyan);">soporte.tikigames@gmail.com</strong> y te ayudamos paso a paso.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-bottom" style="max-width:1400px;margin:0 auto;padding-top:24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;">
+    <p style="color:var(--text-dim);font-size:13px;">© 2025 TikiGames. Todos los derechos reservados.</p>
+    <a href="terminos.html" style="color:var(--text-dim);font-size:13px;transition:0.3s;" onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='var(--text-dim)'">Términos y Condiciones</a>
+    <div class="social-links">
+      <a class="social-btn" href="#" title="TikTok"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/></svg></a>
+      <a class="social-btn" href="#" title="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+      <a class="social-btn" href="https://discord.gg/FN569qsh2X" target="_blank" title="Discord"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg></a>
+    </div>
+  </div>
+</footer>
+
+<!-- MODAL LOGIN -->
+<div class="modal-overlay" id="modal-login">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-login')">✕</button>
+    <h2>Iniciar Sesión</h2>
+    <p class="subtitle">Bienvenido de vuelta a TikiGames</p>
+    <div class="form-group"><label>Correo</label><input type="email" class="form-control" placeholder="tu@correo.com" /></div>
+    <div class="form-group"><label>Contraseña</label><input type="password" class="form-control" placeholder="••••••••" /></div>
+    <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="closeModal('modal-login');showToast('Bienvenido','','')">Entrar</button>
+  </div>
+</div>
+
+<!-- SEARCH OVERLAY -->
+<div class="search-overlay" id="search-overlay">
+  <button data-search-close style="position:absolute;top:30px;right:40px;font-size:28px;color:var(--text-gray);">✕</button>
+  <div class="search-input-wrap">
+    <input class="search-big" type="text" placeholder="Buscar juegos..." />
+    <span class="search-big-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span>
+  </div>
+</div>
+
+<script src="../js/navbar.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/animations.js"></script>
+<script src="../js/ui.js"></script>
+<script src="../js/lang.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+const EMAILJS_PUBLIC_KEY    = 'hCji3MRPS1jUo_Evq';
+const EMAILJS_SERVICE_ID    = 'service_7nzw2z9';
+const EMAILJS_TEMPLATE_AVISO = 'template_d5cm63g';
+const emailjsListo = () => window.emailjs && !EMAILJS_PUBLIC_KEY.startsWith('TU_');
+if (emailjsListo()) emailjs.init(EMAILJS_PUBLIC_KEY);
+function enviarMensaje() {
+  const name    = document.getElementById('c-name').value.trim();
+  const email   = document.getElementById('c-email').value.trim();
+  const subject = document.getElementById('c-subject').value;
+  const msg     = document.getElementById('c-msg').value.trim();
+  if (!name || !email || !subject || !msg) { showToast('Completa todos los campos','',''); return; }
+
+  const btn = document.querySelector('[onclick="enviarMensaje()"]');
+  btn.textContent = 'Enviando...';
+  btn.disabled = true;
+
+  const asuntoTexto = `Contacto TikiGames — ${subject}`;
+  const cuerpoTexto =
+`Nuevo mensaje desde el formulario de contacto de tikigames.shop
+
+Nombre: ${name}
+Correo: ${email}
+Asunto: ${subject}
+
+Mensaje:
+${msg}`;
+
+  const limpiarFormulario = () => {
+    btn.textContent = 'Mensaje enviado';
+    showToast('Mensaje enviado', 'Te responderemos en menos de 24h', '');
+    ['c-name','c-email','c-msg'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('c-subject').value = '';
+    setTimeout(() => { btn.textContent = 'Enviar mensaje'; btn.disabled = false; }, 3000);
+  };
+
+  if (emailjsListo()) {
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_AVISO, {
+      tipo: 'Mensaje de contacto', nombre: name, email: email, mensaje: cuerpoTexto, reply_to: email
+    }).then(limpiarFormulario).catch(() => {
+      window.open(`mailto:soporte.tikigames@gmail.com?subject=${encodeURIComponent(asuntoTexto)}&body=${encodeURIComponent(cuerpoTexto)}`);
+      limpiarFormulario();
+    });
+  } else {
+    window.open(`mailto:soporte.tikigames@gmail.com?subject=${encodeURIComponent(asuntoTexto)}&body=${encodeURIComponent(cuerpoTexto)}`);
+    limpiarFormulario();
+  }
+}
+
+function toggleFaq(btn) {
+  const body  = btn.nextElementSibling;
+  const arrow = btn.querySelector('.faq-arrow');
+  const open  = body.style.maxHeight && body.style.maxHeight !== '0px';
+  document.querySelectorAll('.faq-body').forEach(b => b.style.maxHeight = '0');
+  document.querySelectorAll('.faq-arrow').forEach(a => a.style.transform = 'rotate(0deg)');
+  if (!open) {
+    body.style.maxHeight  = body.scrollHeight + 'px';
+    arrow.style.transform = 'rotate(180deg)';
+  }
+}
+
+// Auto-scroll y abrir FAQ si viene por anchor
+window.addEventListener('load', () => {
+  const hash = location.hash;
+  if (hash === '#faq-reembolso') {
+    const el = document.getElementById('faq-reembolso');
+    if (el) setTimeout(() => {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const btn = el.querySelector('button');
+      if (btn) setTimeout(() => toggleFaq(btn), 500);
+    }, 400);
+  }
+  if (hash === '#faq-tikfinity') {
+    const el = document.getElementById('faq-tikfinity');
+    if (el) setTimeout(() => {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const btn = el.querySelector('button');
+      if (btn) setTimeout(() => toggleFaq(btn), 500);
+    }, 400);
+  }
+  if (hash === '#faq-tikfinity-cuenta') {
+    const el = document.getElementById('faq-tikfinity-cuenta');
+    if (el) setTimeout(() => {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const btn = el.querySelector('button');
+      if (btn) setTimeout(() => toggleFaq(btn), 500);
+    }, 400);
+  }
+  if (hash === '#quienes-somos') {
+    const el = document.getElementById('quienes-somos');
+    if (el) setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300);
+  }
+});
+</script>
+</body>
+</html>
