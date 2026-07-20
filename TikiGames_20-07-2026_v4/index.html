@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TikiGames — Juega. Compite. Gana en TikTok</title>
+  <meta name="description" content="Juegos interactivos para streamers y espectadores de TikTok Live." />
+    <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/navbar.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="icon" href="imagenes/logo/favicon.png" />
+</head>
+<body>
+
+<canvas id="particles-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="imagenes/logo/logo.png" alt="TikiGames" />
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html" id="nav-inicio">Inicio</a></li>
+    <li><a href="pages/catalogo.html" id="nav-juegos">Juegos</a></li>
+    <li><a href="pages/comunidad.html" id="nav-comunidad">Comunidad</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="nav-search-btn" data-search-open title="Buscar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    </button>
+    <button class="btn btn-primary" onclick="openModal('modal-login')" id="nav-login-btn">Iniciar Sesión</button>
+  </div>
+  <button class="hamburger"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-nav">
+  <a href="index.html">Inicio</a>
+  <a href="pages/catalogo.html">Juegos</a>
+  <a href="pages/comunidad.html">Comunidad</a>
+  <div style="margin-top:16px;">
+    <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="openModal('modal-login')">Iniciar Sesión</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero" style="position:relative;overflow:hidden;min-height:100vh;display:flex;align-items:center;padding-top:70px;">
+  <div style="position:absolute;inset:0;background:url('imagenes/banners/hero_principal.jpg') center/cover no-repeat;filter:brightness(0.35);z-index:0;"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,0,80,0.15) 0%,transparent 50%,rgba(0,240,255,0.1) 100%);z-index:1;"></div>
+  <div style="position:absolute;bottom:0;left:0;right:0;height:200px;background:linear-gradient(to top,var(--bg-primary),transparent);z-index:2;"></div>
+
+  <!-- Hero image carousel — z-index:3, detrás del contenido -->
+  <div class="hero-carousel-wrap" style="position:absolute;right:0;top:0;width:58%;height:100vh;z-index:3;">
+    <div style="position:absolute;inset:0;background:linear-gradient(to right, var(--bg-primary) 0%, rgba(10,10,15,0.65) 25%, transparent 60%);z-index:5;pointer-events:none;"></div>
+    <div style="position:absolute;top:0;left:0;right:0;height:260px;background:linear-gradient(to bottom, var(--bg-primary) 0%, transparent 100%);z-index:5;pointer-events:none;"></div>
+    <div style="position:absolute;bottom:0;left:0;right:0;height:240px;background:linear-gradient(to top, var(--bg-primary) 0%, transparent 100%);z-index:5;pointer-events:none;"></div>
+    <div style="position:absolute;top:0;right:0;bottom:0;width:120px;background:linear-gradient(to left, var(--bg-primary) 0%, transparent 100%);z-index:5;pointer-events:none;"></div>
+
+    <div class="hero-carousel-track" style="position:absolute;inset:0;">
+      <img class="hero-slide active" src="imagenes/banners/gamer_hero.png" alt="Streamer jugando" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:left center;opacity:1;transition:opacity 0.7s ease;" />
+      <img class="hero-slide" src="imagenes/banners/hero_slide_prueba.jpg" alt="Prueba un día gratis" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:left center;opacity:0;transition:opacity 0.7s ease;" />
+      <img class="hero-slide" src="imagenes/banners/hero_slide_creador.jpg" alt="Sé un creador" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:left center;opacity:0;transition:opacity 0.7s ease;" />
+    </div>
+
+    <div style="position:absolute;bottom:64px;left:50%;transform:translateX(-50%);z-index:7;display:flex;align-items:center;gap:14px;pointer-events:auto;">
+      <button class="hero-carousel-arrow" onclick="heroCarouselMove(-1)" aria-label="Anterior">‹</button>
+      <div style="display:flex;gap:8px;">
+        <span class="hero-dot active" onclick="heroCarouselGoTo(0)"><i class="hero-dot-fill"></i></span>
+        <span class="hero-dot" onclick="heroCarouselGoTo(1)"><i class="hero-dot-fill"></i></span>
+        <span class="hero-dot" onclick="heroCarouselGoTo(2)"><i class="hero-dot-fill"></i></span>
+      </div>
+      <button class="hero-carousel-arrow" onclick="heroCarouselMove(1)" aria-label="Siguiente">›</button>
+    </div>
+  </div>
+
+  <!-- Contenido — z-index:10, siempre encima de la imagen -->
+  <div style="position:relative;z-index:10;max-width:1400px;margin:0 auto;padding:80px 40px;width:100%;">
+    <div style="max-width:min(580px, 50%);">
+
+      <h1 id="hero-h1" class="fade-in-up delay-2" style="font-family:'Orbitron',monospace;font-size:clamp(32px,5.5vw,80px);font-weight:900;line-height:1.0;margin-bottom:12px;letter-spacing:-1px;">
+        JUEGA. COMPITE. GANA.
+      </h1>
+
+      <h2 id="hero-h2" class="fade-in-up delay-2" style="font-family:'Orbitron',monospace;font-size:clamp(22px,3.5vw,54px);font-weight:900;color:var(--cyan);text-shadow:0 0 30px rgba(0,240,255,0.6);margin-bottom:24px;animation:neon-pulse 2.5s ease infinite;">
+        EN TIKTOK LIVE.
+      </h2>
+
+      <p class="fade-in-up delay-3" style="font-size:clamp(15px,1.3vw,18px);color:var(--text-gray);max-width:480px;line-height:1.7;margin-bottom:36px;">
+        <span id="hero-sub">Juegos interactivos para streamers y espectadores.</span><br>
+        <strong style="color:white;" id="hero-sub2">Tu comunidad decide la partida.</strong>
+      </p>
+
+      <div class="fade-in-up delay-4" style="display:flex;gap:16px;flex-wrap:wrap;position:relative;z-index:11;">
+        <a href="pages/catalogo.html" class="btn btn-primary btn-lg" id="btn-explorar">Explorar Juegos</a>
+        <a href="pages/comunidad.html" class="btn btn-outline btn-lg" id="btn-comunidad">Unirse a la comunidad</a>
+      </div>
+
+      <div class="stats-strip fade-in-up delay-5" style="margin-top:56px;">
+        <div class="stat-item">
+          <div class="stat-number" data-target="15" data-suffix="">0</div>
+          <div class="stat-label" id="stat-jugadores">Jugadores activos</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-target="7" data-suffix="">0</div>
+          <div class="stat-label" id="stat-streams">Streams en vivo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JUEGO DESTACADO — Mundialito Torneo -->
+<section class="section" style="position:relative;z-index:1;">
+  <div class="section-header reveal">
+    <h2 class="section-title" id="sec-destacado">Juego Destacado</h2>
+    <a href="pages/catalogo.html" class="section-link" id="sec-catalogo">Ver catálogo →</a>
+  </div>
+
+  <div class="reveal" style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;">
+    <a href="pages/juego.html" style="position:relative;overflow:hidden;display:block;">
+      <img src="imagenes/juegos/mundialito_torneo.jpg" alt="Mundialito Torneo" style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;transition:var(--transition);" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'" />
+      <div style="position:absolute;top:16px;left:16px;">
+        <span class="badge badge-red">NUEVO</span>
+      </div>
+    </a>
+    <div style="padding:40px 40px 40px 0;">
+      <span class="badge badge-cyan" style="margin-bottom:16px;display:inline-block;" id="badge-deportivo">DEPORTIVO</span>
+      <h3 style="font-family:'Rajdhani',sans-serif;font-size:36px;font-weight:700;letter-spacing:1px;margin-bottom:12px;">MUNDIALITO TORNEO</h3>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
+        <span class="stars">★★★★✩</span>
+        <span style="color:var(--text-dim);font-size:13px;">4.5 · Nuevo</span>
+      </div>
+      <p id="game-desc" style="color:var(--text-gray);line-height:1.8;margin-bottom:24px;">Experiencia interactiva para TikTok Live. Tu audiencia elige países, apoya a sus favoritos y los impulsa hasta coronar al campeón. Incluye clasificación, goleadores, multiplicadores y personalización.</p>
+      <div style="display:flex;flex-direction:column;gap:14px;max-width:340px;">
+        <a href="pages/juego.html" class="btn btn-primary btn-lg" id="btn-comprar" style="width:100%;justify-content:center;font-size:19px;padding:18px 28px;box-shadow:0 0 28px rgba(255,0,80,0.35);">
+          Juega Ya
+        </a>
+        <div class="trial-btn-wrap">
+          <button class="btn btn-outline btn-lg" style="width:100%;justify-content:center;" onclick="openModal('modal-trial')">
+            Prueba 1 día gratis
+          </button>
+          <div class="trial-tooltip">
+            Compruébalo tú mismo primero: descubre el excelente juego que vas a disfrutar junto a tu comunidad. Tu primer día — 24 horas — es totalmente gratis.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- BANNER COMUNIDAD -->
+<section class="section reveal" style="position:relative;z-index:1;">
+  <div style="background:linear-gradient(135deg,rgba(255,0,80,0.12),rgba(123,47,255,0.12));border:1px solid rgba(255,0,80,0.25);border-radius:var(--radius-lg);padding:60px 48px;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;position:relative;overflow:hidden;">
+    <div style="position:absolute;inset:0;background:url('imagenes/banners/banner_promo.jpg') center/cover no-repeat;opacity:0.1;border-radius:var(--radius-lg);"></div>
+    <div style="position:relative;z-index:1;">
+      <div style="color:var(--cyan);font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:2px;font-size:14px;text-transform:uppercase;margin-bottom:8px;" id="banner-label">Comunidad TikiGames</div>
+      <h2 id="banner-titulo" style="font-size:clamp(28px,4vw,48px);margin-bottom:12px;">TU JUEGO.<br>TU LIVE.<br><span style="color:var(--red);" id="banner-t3">TU COMUNIDAD.</span></h2>
+      <p id="banner-desc" style="color:var(--text-gray);max-width:400px;font-size:16px;">Conecta con miles de streamers y espectadores. Juega en tiempo real con tu comunidad de TikTok.</p>
+    </div>
+    <div style="position:relative;z-index:1;display:flex;flex-direction:column;gap:16px;align-items:flex-start;">
+      <div style="display:flex;gap:32px;margin-bottom:8px;">
+        <div>
+          <div style="font-family:'Orbitron',monospace;font-size:24px;color:var(--cyan);">1+</div>
+          <div style="color:var(--text-dim);font-size:13px;" id="banner-stat1">Juego disponible</div>
+        </div>
+      </div>
+      <a href="pages/comunidad.html" class="btn btn-primary btn-lg" id="btn-unirse">Unirse ahora</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img class="footer-logo" src="imagenes/logo/logo.png" alt="TikiGames" />
+      <p id="footer-desc">Juegos interactivos para streamers y espectadores de TikTok Live. Conecta tu comunidad, juega en tiempo real.</p>
+    </div>
+    <div class="footer-col">
+      <h4 id="footer-juegos">Juegos</h4>
+      <ul>
+        <li><a href="pages/catalogo.html" id="f-catalogo">Catálogo</a></li>
+        <li><a href="pages/juego.html" id="f-mundialito">Mundialito Torneo</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4 id="footer-empresa">Empresa</h4>
+      <ul>
+        <li><a href="pages/comunidad.html#quienes-somos" id="f-nosotros">Sobre nosotros</a></li>
+        <li><a href="pages/comunidad.html" id="f-contacto">Contacto</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4 id="footer-soporte">Soporte</h4>
+      <ul>
+        <li><a href="pages/comunidad.html" id="f-ayuda">Centro de ayuda</a></li>
+        <li><a href="pages/comunidad.html#faq-reembolso" id="f-reembolsos">Reembolsos</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <a href="pages/terminos.html" id="footer-copy" style="color:var(--text-dim);font-size:13px;transition:var(--transition);" onmouseover="this.style.color='white'" onmouseout="this.style.color='var(--text-dim)'">© 2025 TikiGames. Todos los derechos reservados.</a>
+    <div class="social-links">
+      <a class="social-btn" href="#" title="TikTok">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/></svg>
+      </a>
+      <a class="social-btn" href="#" title="Instagram">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a class="social-btn" href="https://discord.gg/FN569qsh2X" target="_blank" title="Discord">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<!-- MODAL LOGIN -->
+<div class="modal-overlay" id="modal-login">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-login')">✕</button>
+    <h2>Iniciar Sesión</h2>
+    <p class="subtitle">Bienvenido de vuelta a TikiGames</p>
+    <div class="form-group">
+      <label>Correo electrónico</label>
+      <input type="email" class="form-control" placeholder="tu@correo.com" />
+    </div>
+    <div class="form-group">
+      <label>Contraseña</label>
+      <input type="password" class="form-control" placeholder="••••••••" />
+    </div>
+    <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:8px;" onclick="closeModal('modal-login');showToast('Bienvenido','Sesión iniciada correctamente','')">
+      Entrar
+    </button>
+    <div style="text-align:center;margin-top:20px;">
+      <p style="color:var(--text-dim);font-size:14px;">¿No tienes cuenta? <a href="#" style="color:var(--cyan);">Regístrate gratis</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL PRUEBA GRATIS -->
+<div class="modal-overlay" id="modal-trial">
+  <div class="modal" style="max-width:480px;">
+    <button class="modal-close" onclick="cerrarPrueba()">✕</button>
+
+    <div id="trial-step-1">
+      <h2>Prueba gratis 24 horas</h2>
+      <p class="subtitle">Juega Mundialito Torneo gratis por un día, sin compromiso</p>
+
+      <div style="background:rgba(0,240,255,0.05);border:1px solid rgba(0,240,255,0.2);border-radius:var(--radius-sm);padding:14px 16px;margin-bottom:20px;">
+        <p style="font-size:13px;color:var(--text-gray);line-height:1.7;">
+          Actívalo con tu usuario de TikTok y tendrás acceso completo durante <strong style="color:white;">24 horas</strong>, totalmente gratis. Sin tarjeta, sin compromiso.
+        </p>
+      </div>
+
+      <div class="form-group">
+        <label>Usuario de TikTok</label>
+        <input type="text" class="form-control" id="trial-tiktok" placeholder="@tuusuario" />
+      </div>
+      <div class="form-group">
+        <label>Correo electrónico</label>
+        <input type="email" class="form-control" id="trial-email" placeholder="tu@correo.com" />
+      </div>
+
+      <label style="display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--text-gray);margin-bottom:20px;cursor:pointer;">
+        <input type="checkbox" id="trial-extra-day" style="margin-top:3px;" />
+        Quiero un segundo día de prueba (+$2 USD adicionales)
+      </label>
+
+      <button class="btn btn-primary btn-lg" style="width:100%;justify-content:center;" onclick="solicitarPrueba()">
+        Comenzar prueba gratis
+      </button>
+      <p style="text-align:center;margin-top:12px;font-size:12px;color:var(--text-dim);">
+        Te contactaremos por correo para activar tu acceso.
+      </p>
+    </div>
+
+    <div id="trial-step-2" style="display:none;text-align:center;padding:20px 0;">
+      <div style="width:72px;height:72px;border-radius:50%;background:rgba(0,240,255,0.08);border:2px solid var(--cyan);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h2 style="color:var(--cyan);margin-bottom:8px;">¡Solicitud enviada!</h2>
+      <p style="color:var(--text-gray);line-height:1.7;margin-bottom:16px;">
+        Se abrió tu correo con la solicitud de prueba gratis. Envíalo y activaremos tu acceso de 24 horas lo antes posible.
+      </p>
+      <button class="btn btn-outline" style="margin:0 auto;" onclick="cerrarPrueba()">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<style>
+.trial-btn-wrap { position:relative; }
+.trial-btn-wrap .btn-outline:hover {
+  border-color:#ffd700 !important; color:#ffd700 !important;
+  box-shadow:0 0 18px rgba(255,215,0,0.35);
+}
+.trial-tooltip {
+  position:absolute; bottom:calc(100% + 10px); left:50%; transform:translateX(-50%) translateY(6px);
+  width:280px; background:var(--bg-secondary); border:1px solid var(--cyan); border-radius:var(--radius-sm);
+  padding:12px 14px; font-size:12.5px; line-height:1.6; color:var(--text-gray);
+  box-shadow:0 8px 24px rgba(0,0,0,0.4); opacity:0; pointer-events:none;
+  transition:opacity 0.2s ease, transform 0.2s ease; z-index:20;
+}
+.trial-btn-wrap:hover .trial-tooltip { opacity:1; transform:translateX(-50%) translateY(0); }
+</style>
+<div class="search-overlay" id="search-overlay">
+  <button data-search-close style="position:absolute;top:30px;right:40px;font-size:28px;color:var(--text-gray);">✕</button>
+  <div class="search-input-wrap">
+    <input class="search-big" type="text" placeholder="Buscar juegos..." />
+    <span class="search-big-icon">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    </span>
+  </div>
+  <p style="color:var(--text-dim);margin-top:20px;font-size:14px;">Presiona ESC para cerrar</p>
+</div>
+
+<script src="js/navbar.js"></script>
+<script src="js/search.js"></script>
+<script src="js/animations.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/lang.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+// ─── Carrusel del hero (autoplay + controles) ──
+let heroSlideIndex = 0;
+let heroCarouselTimer = null;
+const heroSlides = document.querySelectorAll('.hero-slide');
+const heroDots   = document.querySelectorAll('.hero-dot');
+
+function heroCarouselRender() {
+  heroSlides.forEach((s, i) => { s.style.opacity = i === heroSlideIndex ? '1' : '0'; s.classList.toggle('active', i === heroSlideIndex); });
+  heroDots.forEach((d, i) => d.classList.toggle('active', i === heroSlideIndex));
+}
+function heroCarouselGoTo(i) {
+  heroSlideIndex = i;
+  heroCarouselRender();
+  heroCarouselRestart();
+}
+function heroCarouselMove(dir) {
+  heroSlideIndex = (heroSlideIndex + dir + heroSlides.length) % heroSlides.length;
+  heroCarouselRender();
+  heroCarouselRestart();
+}
+function heroCarouselRestart() {
+  clearInterval(heroCarouselTimer);
+  heroCarouselTimer = setInterval(() => heroCarouselMove(1), 6000);
+}
+window.heroCarouselGoTo = heroCarouselGoTo;
+window.heroCarouselMove = heroCarouselMove;
+if (heroSlides.length) heroCarouselRestart();
+
+const EMAILJS_PUBLIC_KEY    = 'hCji3MRPS1jUo_Evq';
+const EMAILJS_SERVICE_ID    = 'service_7nzw2z9';
+const EMAILJS_TEMPLATE_AVISO = 'template_d5cm63g';
+const emailjsListo = () => window.emailjs && !EMAILJS_PUBLIC_KEY.startsWith('TU_');
+if (emailjsListo()) emailjs.init(EMAILJS_PUBLIC_KEY);
+// ─── Solicitud de prueba gratis (24h) ────────────
+function solicitarPrueba() {
+  const tiktokEl = document.getElementById('trial-tiktok');
+  const emailEl  = document.getElementById('trial-email');
+  const tiktok   = tiktokEl.value.trim();
+  const email    = emailEl.value.trim();
+  const extra    = document.getElementById('trial-extra-day').checked;
+
+  let ok = true;
+  if (!tiktok) {
+    tiktokEl.style.borderColor = 'var(--red)';
+    tiktokEl.style.boxShadow   = '0 0 0 3px rgba(255,0,80,0.15)';
+    tiktokEl.placeholder = 'Este campo es obligatorio';
+    ok = false;
+  } else { tiktokEl.style.borderColor = ''; tiktokEl.style.boxShadow = ''; }
+
+  if (!email || !email.includes('@')) {
+    emailEl.style.borderColor = 'var(--red)';
+    emailEl.style.boxShadow   = '0 0 0 3px rgba(255,0,80,0.15)';
+    emailEl.placeholder = email ? 'Correo inválido' : 'Este campo es obligatorio';
+    ok = false;
+  } else { emailEl.style.borderColor = ''; emailEl.style.boxShadow = ''; }
+
+  if (!ok) { showToast('Completa tu usuario de TikTok y correo para continuar'); return; }
+
+  const asuntoTexto = 'Solicitud de prueba gratis — Mundialito Torneo';
+  const cuerpoTexto =
+`Hola equipo de TikiGames,
+
+Quiero activar mi prueba gratis de 24 horas de Mundialito Torneo.
+
+Usuario de TikTok: ${tiktok}
+Correo de contacto: ${email}
+Día adicional de prueba (+$2 USD): ${extra ? 'Sí, quiero un segundo día' : 'No, solo el día gratis'}
+
+Quedo atento a la activación.`;
+
+  if (emailjsListo()) {
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_AVISO, {
+      tipo: 'Prueba gratis', nombre: tiktok, email: email, mensaje: cuerpoTexto, reply_to: email
+    }).catch(() => {
+      window.open(`mailto:soporte.tikigames@gmail.com?subject=${encodeURIComponent(asuntoTexto)}&body=${encodeURIComponent(cuerpoTexto)}`);
+    });
+  } else {
+    window.open(`mailto:soporte.tikigames@gmail.com?subject=${encodeURIComponent(asuntoTexto)}&body=${encodeURIComponent(cuerpoTexto)}`);
+  }
+
+  document.getElementById('trial-step-1').style.display = 'none';
+  document.getElementById('trial-step-2').style.display = 'block';
+}
+
+function cerrarPrueba() {
+  document.getElementById('trial-step-1').style.display = 'block';
+  document.getElementById('trial-step-2').style.display = 'none';
+  ['trial-tiktok','trial-email'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+  document.getElementById('trial-extra-day').checked = false;
+  closeModal('modal-trial');
+}
+window.cerrarPrueba = cerrarPrueba;
+
+document.addEventListener('DOMContentLoaded', () => {
+  const overlay = document.getElementById('modal-trial');
+  if (overlay) overlay.addEventListener('click', e => { if (e.target === overlay) cerrarPrueba(); });
+});
+</script>
+</body>
+</html>

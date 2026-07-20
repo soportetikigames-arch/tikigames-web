@@ -1,0 +1,140 @@
+/* ============================================
+   TIKIGAMES - BASE
+   Variables, Reset, Tipografía, Scrollbar
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@700;900&family=Inter:wght@300;400;500;600&display=swap');
+
+/* ─── Variables ─────────────────────────────── */
+:root {
+  --bg-primary:      #0a0a0f;
+  --bg-secondary:    #12121e;
+  --bg-card:         #1a1a2e;
+  --bg-overlay:      rgba(10, 10, 15, 0.85);
+
+  --red:             #ff0050;
+  --red-dark:        #cc0040;
+  --cyan:            #00f0ff;
+  --cyan-dark:       #00b8c8;
+  --purple:          #7b2fff;
+  --gold:            #ffd700;
+
+  --text-white:      #ffffff;
+  --text-gray:       #b0b0c0;
+  --text-dim:        #606078;
+
+  --border:          rgba(255,255,255,0.08);
+  --border-glow:     rgba(0,240,255,0.3);
+
+  --radius-sm:       6px;
+  --radius-md:       12px;
+  --radius-lg:       20px;
+
+  --shadow-red:      0 0 20px rgba(255,0,80,0.4);
+  --shadow-cyan:     0 0 20px rgba(0,240,255,0.3);
+  --shadow-card:     0 8px 32px rgba(0,0,0,0.5);
+
+  --transition:      0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── Reset ──────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-white);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+a       { text-decoration: none; color: inherit; }
+ul      { list-style: none; }
+img     { max-width: 100%; display: block; }
+button  { cursor: pointer; border: none; outline: none; background: none; }
+
+/* ─── Scrollbar ─────────────────────────────── */
+::-webkit-scrollbar       { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-secondary); }
+::-webkit-scrollbar-thumb { background: var(--red); border-radius: 3px; }
+
+/* ─── Tipografía ─────────────────────────────── */
+.font-display { font-family: 'Orbitron', monospace; }
+.font-title   { font-family: 'Rajdhani', sans-serif; }
+
+h1, h2, h3 {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+/* ─── Utilidades de layout ───────────────────── */
+.section {
+  padding: 80px 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  margin: 0 40px;
+}
+
+.stars {
+  color: var(--gold);
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+/* ─── Responsive base ────────────────────────── */
+@media (max-width: 768px) {
+  .section { padding: 60px 20px; }
+}
+
+/* ─── Hero responsive ────────────────────────── */
+@media (max-width: 900px) {
+  /* En tablet/móvil el carrusel se reubica arriba del texto, en vez de ocultarse */
+  .hero { flex-direction: column; padding-top: 90px !important; }
+  .hero-carousel-wrap {
+    position: relative !important;
+    width: 100% !important;
+    height: 260px !important;
+    right: auto !important;
+    bottom: auto !important;
+    order: -1;
+    margin-bottom: 12px;
+  }
+  .hero > div[style*="z-index:10"] > div {
+    max-width: 100% !important;
+  }
+}
+@media (max-width: 768px) {
+  .hero { min-height: auto !important; padding-bottom: 60px; display: flex !important; flex-direction: column !important; }
+  .hero > div[style*="z-index:10"] { padding: 24px 20px 40px !important; order: 1; }
+  .stats-strip { flex-direction: row; gap: 24px; }
+}
+
+/* ─── Hero carousel controls ─────────────────── */
+.hero-carousel-arrow {
+  width: 30px; height: 30px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.3);
+  background: rgba(10,10,15,0.5); color: white; font-size: 18px; line-height: 1;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: var(--transition);
+}
+.hero-carousel-arrow:hover { border-color: var(--cyan); color: var(--cyan); background: rgba(0,240,255,0.1); }
+.hero-dot {
+  width: 8px; height: 6px; border-radius: 3px; background: rgba(255,255,255,0.3);
+  cursor: pointer; display: inline-block; transition: width 0.3s ease, border-radius 0.3s ease;
+  position: relative; overflow: hidden;
+}
+.hero-dot.active { width: 34px; border-radius: 3px; background: rgba(255,255,255,0.2); }
+.hero-dot-fill {
+  position: absolute; inset: 0; width: 0%; background: var(--cyan); border-radius: 3px;
+  display: block;
+}
+.hero-dot.active .hero-dot-fill { animation: heroDotFill 6s linear forwards; }
+@keyframes heroDotFill { from { width: 0%; } to { width: 100%; } }
