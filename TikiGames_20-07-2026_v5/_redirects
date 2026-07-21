@@ -1,0 +1,6 @@
+# Redirigir www a sin www
+https://www.tikigames.shop/* https://tikigames.shop/:splat 301!
+
+# Forzar HTTPS
+http://tikigames.shop/* https://tikigames.shop/:splat 301!
+http://www.tikigames.shop/* https://tikigames.shop/:splat 301!
