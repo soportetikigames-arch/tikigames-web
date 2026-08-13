@@ -127,7 +127,14 @@ h1, h2, h3 {
 }
 .hero-carousel-arrow:hover { border-color: var(--cyan); color: var(--cyan); background: rgba(0,240,255,0.1); }
 .hero-dot {
-  width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.3);
-  cursor: pointer; display: inline-block; transition: var(--transition);
+  width: 8px; height: 6px; border-radius: 3px; background: rgba(255,255,255,0.3);
+  cursor: pointer; display: inline-block; transition: width 0.3s ease, border-radius 0.3s ease;
+  position: relative; overflow: hidden;
 }
-.hero-dot.active { background: var(--cyan); width: 22px; border-radius: 4px; }
+.hero-dot.active { width: 34px; border-radius: 3px; background: rgba(255,255,255,0.2); }
+.hero-dot-fill {
+  position: absolute; inset: 0; width: 0%; background: var(--cyan); border-radius: 3px;
+  display: block;
+}
+.hero-dot.active .hero-dot-fill { animation: heroDotFill 6s linear forwards; }
+@keyframes heroDotFill { from { width: 0%; } to { width: 100%; } }

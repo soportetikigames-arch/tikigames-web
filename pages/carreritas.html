@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carreritas — TikiGames</title>
+    <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/navbar.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/animations.css" />
+  <link rel="icon" href="../imagenes/logo/favicon.png" />
+  <!-- ePayco Checkout -->
+  <script src="https://checkout.epayco.co/checkout.js"></script>
+  <!-- PayPal SDK (Hosted Buttons) -->
+  <script src="https://www.paypal.com/sdk/js?client-id=BAAz58YwiFdik4ODXr981asRsD709m_V4FUxgD73zckbYDBFHeUBKeJVZ8aWYMRHktTETWWhmEMKAz3zz8&components=hosted-buttons&disable-funding=venmo&currency=USD"></script>
+  <!-- EmailJS (envío automático de correos) -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+
+<canvas id="particles-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a href="../index.html" class="nav-logo">
+    <img src="../imagenes/logo/logo.png" alt="TikiGames" />
+  </a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Inicio</a></li>
+    <li><a href="catalogo.html" class="active">Juegos</a></li>
+    <li><a href="comunidad.html">Comunidad</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="nav-search-btn" data-search-open>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    </button>
+    <button class="btn btn-primary" onclick="openModal('modal-login')">Iniciar Sesión</button>
+  </div>
+  <button class="hamburger"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-nav">
+  <a href="../index.html">Inicio</a>
+  <a href="catalogo.html">Juegos</a>
+  <a href="comunidad.html">Comunidad</a>
+</div>
+
+<!-- GAME DETAIL -->
+<div style="padding-top:90px;max-width:1400px;margin:0 auto;padding:90px 40px 80px;">
+
+  <!-- Breadcrumb -->
+  <div style="display:flex;align-items:center;gap:8px;color:var(--text-dim);font-size:13px;margin-bottom:32px;">
+    <a href="../index.html" style="color:var(--text-dim);" onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='var(--text-dim)'">Inicio</a>
+    <span>›</span>
+    <a href="catalogo.html" style="color:var(--text-dim);" onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='var(--text-dim)'">Juegos</a>
+    <span>›</span>
+    <span style="color:var(--text-white);">Carreritas</span>
+  </div>
+
+  <!-- 2-col layout -->
+  <div style="display:grid;grid-template-columns:1fr 380px;gap:48px;align-items:start;">
+
+    <!-- LEFT -->
+    <div>
+      <!-- Carrusel de imágenes — loop infinito suave -->
+      <div id="game-carousel" style="position:relative;width:100%;border-radius:var(--radius-lg);overflow:hidden;background:#0a0a0f;margin-bottom:12px;">
+        <!--
+          5 slides: 0=portada | 1=poderes | 2=multiplicadores | 3=modos de tiempo | 4=CLON portada
+          Track: width:500% (5 slides × 20% cada uno)
+          Para loop: cuando llega al slide 4 (clon), salta sin transición al slide 0
+        -->
+        <div id="carousel-track" style="display:flex;width:500%;transition:transform 0.55s cubic-bezier(0.4,0,0.2,1);">
+          <div style="width:20%;flex-shrink:0;">
+            <img src="../imagenes/juegos/carreritas_1_portada.jpg" alt="Portada"
+              style="width:100%;aspect-ratio:16/9;object-fit:contain;display:block;background:#0a0a0f;" />
+          </div>
+          <div style="width:20%;flex-shrink:0;">
+            <img src="../imagenes/juegos/carreritas_2_poderes.jpg" alt="Poderes"
+              style="width:100%;aspect-ratio:16/9;object-fit:contain;display:block;background:#0a0a0f;" />
+          </div>
+          <div style="width:20%;flex-shrink:0;">
+            <img src="../imagenes/juegos/carreritas_3_multiplicadores.jpg" alt="Multiplicadores"
+              style="width:100%;aspect-ratio:16/9;object-fit:contain;display:block;background:#0a0a0f;" />
+          </div>
+          <div style="width:20%;flex-shrink:0;">
+            <img src="../imagenes/juegos/carreritas_4_modos.jpg" alt="Modos de Tiempo"
+              style="width:100%;aspect-ratio:16/9;object-fit:contain;display:block;background:#0a0a0f;" />
+          </div>
+          <!-- Clon del slide 0 para loop suave -->
+          <div style="width:20%;flex-shrink:0;">
+            <img src="../imagenes/juegos/carreritas_1_portada.jpg" alt="Portada (clon)"
+              style="width:100%;aspect-ratio:16/9;object-fit:contain;display:block;background:#0a0a0f;" />
+          </div>
+        </div>
+        <!-- Botones -->
+        <button onclick="moveCarousel(-1)" aria-label="Anterior"
+          style="position:absolute;top:50%;left:10px;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,0.65);border:1px solid rgba(255,255,255,0.15);color:white;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10;transition:0.2s;backdrop-filter:blur(4px);"
+          onmouseover="this.style.background='var(--red)'" onmouseout="this.style.background='rgba(0,0,0,0.65)'">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <button onclick="moveCarousel(1)" aria-label="Siguiente"
+          style="position:absolute;top:50%;right:10px;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,0.65);border:1px solid rgba(255,255,255,0.15);color:white;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10;transition:0.2s;backdrop-filter:blur(4px);"
+          onmouseover="this.style.background='var(--red)'" onmouseout="this.style.background='rgba(0,0,0,0.65)'">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+      </div>
+      <!-- Dots (4 reales, el clon no cuenta) -->
+      <div id="carousel-dots" style="display:flex;gap:6px;justify-content:center;padding:10px 0 20px;">
+        <span onclick="goToSlide(0)" style="width:8px;height:8px;border-radius:50%;background:var(--red);cursor:pointer;transition:0.3s;transform:scale(1.3);display:inline-block;"></span>
+        <span onclick="goToSlide(1)" style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.2);cursor:pointer;transition:0.3s;display:inline-block;"></span>
+        <span onclick="goToSlide(2)" style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.2);cursor:pointer;transition:0.3s;display:inline-block;"></span>
+        <span onclick="goToSlide(3)" style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.2);cursor:pointer;transition:0.3s;display:inline-block;"></span>
+      </div>
+
+      <!-- Description -->
+      <h2 style="font-family:'Rajdhani',sans-serif;font-size:22px;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border);">
+        Descripción del Juego
+      </h2>
+      <p style="color:var(--text-gray);line-height:1.8;margin-bottom:16px;">
+        Carreritas es una carrera mundial donde cada país compite por llegar primero a la meta. 🚀 Tu comunidad impulsa a su selección mediante regalos de TikTok que activan poderes y multiplicadores, haciendo que cada carrera sea más rápida, estratégica y emocionante.
+      </p>
+      <p style="color:var(--text-gray);line-height:1.8;margin-bottom:24px;">
+        Con diferentes modos de juego y opciones de personalización, cada partida se convierte en una competencia llena de momentos inesperados, diversión y ganas de demostrar qué país es el más rápido. 🏆⚡
+      </p>
+
+      <!-- Bloque resaltado de entrega -->
+      <div style="background:rgba(0,240,255,0.06);border:1px solid rgba(0,240,255,0.25);border-left:4px solid var(--cyan);border-radius:var(--radius-sm);padding:16px 20px;">
+        <p style="color:var(--text-white);font-size:14px;line-height:1.7;margin:0;">
+          <strong style="color:var(--cyan);font-family:'Rajdhani',sans-serif;letter-spacing:0.5px;">Entrega digital inmediata —</strong>
+          Tras confirmar tu compra, recibirás en tu correo el juego, licencias y todos los archivos necesarios para comenzar a disfrutar la experiencia con tu comunidad.
+        </p>
+      </div>
+
+      <!-- Info table -->
+      <div style="margin-top:32px;">
+        <h2 style="font-family:'Rajdhani',sans-serif;font-size:22px;letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--border);">
+          Información
+        </h2>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+          <a href="catalogo.html?cat=deportivo" style="text-decoration:none;" title="Ver juegos deportivos">
+            <div class="info-cell" style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;cursor:pointer;transition:var(--transition);" onmouseover="this.style.borderColor='var(--red)';this.style.boxShadow='0 0 12px rgba(255,0,80,0.15)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow=''">
+              <div style="color:var(--text-dim);font-size:12px;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Categoría</div>
+              <div style="font-family:'Rajdhani',sans-serif;font-weight:700;color:var(--red);">Deportivo ↗</div>
+            </div>
+          </a>
+          <a href="comunidad.html#faq-tikfinity" style="text-decoration:none;" title="¿Qué es TikFinity?">
+            <div class="info-cell" style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;cursor:pointer;transition:var(--transition);" onmouseover="this.style.borderColor='var(--cyan)';this.style.boxShadow='0 0 12px rgba(0,240,255,0.15)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow=''">
+              <div style="color:var(--text-dim);font-size:12px;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Plataforma</div>
+              <div style="font-family:'Rajdhani',sans-serif;font-weight:700;color:var(--cyan);">TikFinity ↗</div>
+            </div>
+          </a>
+          <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;">
+            <div style="color:var(--text-dim);font-size:12px;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Idioma</div>
+            <div style="font-family:'Rajdhani',sans-serif;font-weight:700;">Español</div>
+          </div>
+          <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;">
+            <div style="color:var(--text-dim);font-size:12px;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Jugadores</div>
+            <div style="font-family:'Rajdhani',sans-serif;font-weight:700;">Ilimitado</div>
+          </div>
+          <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;">
+            <div style="color:var(--text-dim);font-size:12px;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Precio</div>
+            <div style="font-family:'Rajdhani',sans-serif;font-weight:700;color:var(--cyan);">$35 USD</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tags -->
+      <div style="margin-top:24px;display:flex;gap:8px;flex-wrap:wrap;">
+        <span class="badge badge-gray">Multijugador</span>
+        <span class="badge badge-gray">TikTok Live</span>
+        <span class="badge badge-gray">Carreras</span>
+        <span class="badge badge-gray">Estrategia</span>
+        <span class="badge badge-gray">Interactivo</span>
+      </div>
+
+      <!-- Reseñas de la comunidad -->
+      <div style="margin-top:40px;">
+        <h2 style="font-family:'Rajdhani',sans-serif;font-size:22px;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border);">
+          Reseñas de la Comunidad
+        </h2>
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:24px;">
+          <div style="font-family:'Orbitron',monospace;font-size:36px;font-weight:700;color:var(--cyan);">4.7</div>
+          <div>
+            <div class="stars" style="font-size:18px;">★★★★★</div>
+            <div style="color:var(--text-dim);font-size:12px;" id="review-count-text">Valorado por 3 personas</div>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:14px;" id="reviews-list">
+          <!-- Reseña 1 — Perú, con comentario -->
+          <div class="review-item" style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 18px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+              <div style="display:flex;align-items:center;gap:9px;">
+                <div style="width:28px;height:28px;border-radius:50%;background:var(--bg-secondary);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;">🇵🇪</div>
+                <div style="font-family:'Rajdhani',sans-serif;font-weight:700;">Fabrizio Quispe</div>
+              </div>
+              <div class="stars" style="font-size:13px;">★★★★★</div>
+            </div>
+            <p style="color:var(--text-gray);font-size:13px;line-height:1.6;margin:0;">Mi comunidad se volvió loca con los multiplicadores, ¡se armó una competencia buenísima entre países!</p>
+          </div>
+
+          <!-- Reseña 2 — Argentina, con comentario -->
+          <div class="review-item" style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 18px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+              <div style="display:flex;align-items:center;gap:9px;">
+                <div style="width:28px;height:28px;border-radius:50%;background:var(--bg-secondary);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;">🇦🇷</div>
+                <div style="font-family:'Rajdhani',sans-serif;font-weight:700;">Lucía Fernández</div>
+              </div>
+              <div class="stars" style="font-size:13px;">★★★★★</div>
+            </div>
+            <p style="color:var(--text-gray);font-size:13px;line-height:1.6;margin:0;">Excelente para lives largos, el modo muerte súbita mantiene a todos pendientes hasta el final.</p>
+          </div>
+
+          <!-- Reseña 3 — Chile, solo puntuación -->
+          <div class="review-item" style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 18px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <div style="display:flex;align-items:center;gap:9px;">
+                <div style="width:28px;height:28px;border-radius:50%;background:var(--bg-secondary);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;">🇨🇱</div>
+                <div style="font-family:'Rajdhani',sans-serif;font-weight:700;">Benjamín Rojas</div>
+              </div>
+              <div class="stars" style="font-size:13px;">★★★★✩</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Purchase Card -->
+    <div style="position:sticky;top:90px;">
+      <div style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px;">
+
+        <span class="badge badge-cyan" style="margin-bottom:12px;display:inline-block;">DEPORTIVO</span>
+        <h1 style="font-family:'Rajdhani',sans-serif;font-size:30px;font-weight:700;margin-bottom:8px;letter-spacing:1px;">CARRERITAS</h1>
+
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;">
+          <div class="stars">★★★★★</div>
+          <span style="color:var(--text-gray);font-size:13px;">4.7</span>
+        </div>
+
+        <div style="border-top:1px solid var(--border);padding-top:20px;margin-bottom:20px;">
+          <div style="font-size:13px;color:var(--text-dim);margin-bottom:4px;">Precio</div>
+          <div style="font-family:'Orbitron',monospace;font-size:32px;font-weight:700;color:var(--cyan);text-shadow:0 0 20px rgba(0,240,255,0.4);">$35 USD</div>
+          <div style="font-size:12px;color:var(--text-dim);">Pago único — Acceso permanente</div>
+        </div>
+
+        <button class="btn btn-primary btn-lg" style="width:100%;justify-content:center;font-size:19px;padding:18px 24px;margin-bottom:12px;box-shadow:0 0 24px rgba(255,0,80,0.3);" onclick="abrirCheckoutConPlan('permanente')">
+          Juega Ya
+        </button>
+
+        <div class="trial-btn-wrap" style="display:flex;justify-content:center;">
+          <button class="trial-pill-btn" onclick="abrirCheckoutConPlan('prueba')">
+            🎯 Prueba 1 día — $2 USD
+          </button>
+          <div class="side-tooltip">
+            Prueba el juego por 24 horas antes de decidirte por el plan permanente, por solo <strong style="color:white;">$2 USD</strong>. Este juego no tiene prueba gratuita.
+          </div>
+        </div>
+
+        <!-- Trust signals -->
+        <div style="margin-top:24px;border-top:1px solid var(--border);padding-top:20px;">
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;align-items:center;gap:10px;color:var(--text-gray);font-size:13px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Entrega por correo tras confirmar el pago
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;color:var(--text-gray);font-size:13px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              Pago seguro vía PayPal
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;color:var(--text-gray);font-size:13px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+              Tarjeta de crédito / débito aceptada
+            </div>
+          </div>
+        </div>
+
+        <!-- Payment logos -->
+        <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border);">
+          <p style="font-size:11px;color:var(--text-dim);margin-bottom:12px;letter-spacing:1px;text-transform:uppercase;">Métodos de pago</p>
+          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+
+            <!-- PayPal -->
+            <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:6px 10px;display:flex;align-items:center;">
+              <svg width="60" height="16" viewBox="0 0 101 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11.8 1.6H5.5C5.1 1.6 4.7 1.9 4.6 2.3L2 18.8c-.1.3.2.6.5.6h3.2c.4 0 .8-.3.8-.7l.7-4.4c.1-.4.4-.7.8-.7h2.1c4.4 0 7-2.1 7.6-6.3.3-1.8 0-3.2-.8-4.2-.9-1-2.5-1.5-4.1-1.5zm.8 6.2c-.4 2.4-2.2 2.4-3.9 2.4h-1l.7-4.3c0-.3.3-.4.5-.4h.4c1.2 0 2.3 0 2.9.7.3.4.5 1 .4 1.6z" fill="#009cde"/>
+                <path d="M32.5 7.7h-3.2c-.3 0-.5.2-.5.4l-.1.9-.2-.3c-.7-1-2.1-1.3-3.6-1.3-3.4 0-6.3 2.6-6.9 6.2-.3 1.8.1 3.5 1.1 4.7 1 1.1 2.3 1.5 3.9 1.5 2.7 0 4.2-1.7 4.2-1.7l-.1.9c-.1.3.2.6.5.6h2.9c.4 0 .8-.3.8-.7l1.7-10.5c.1-.3-.2-.7-.5-.7zm-4.5 6c-.3 1.8-1.7 3-3.5 3-.9 0-1.6-.3-2.1-.8-.4-.6-.6-1.4-.5-2.2.3-1.8 1.7-3 3.5-3 .9 0 1.6.3 2.1.9.5.5.6 1.3.5 2.1z" fill="#009cde"/>
+                <path d="M50.7 7.7h-3.2c-.3 0-.6.2-.8.4l-4.6 6.8-2-6.5c-.1-.4-.5-.7-.9-.7h-3.1c-.4 0-.6.4-.5.7l3.7 10.9-3.5 4.9c-.3.4 0 .9.4.9h3.2c.3 0 .6-.2.8-.4L51.1 8.6c.2-.4-.1-.9-.4-.9z" fill="#003087"/>
+                <path d="M61.7 1.6h-6.3c-.4 0-.8.3-.8.7L52 18.8c-.1.3.2.6.5.6h3.4c.3 0 .5-.2.6-.5l.7-4.6c.1-.4.4-.7.8-.7h2.1c4.4 0 7-2.1 7.6-6.3.3-1.8 0-3.2-.8-4.2-1-1-2.5-1.5-4.2-1.5zm.8 6.2c-.4 2.4-2.2 2.4-3.9 2.4h-1l.7-4.3c0-.3.3-.4.5-.4h.5c1.2 0 2.3 0 2.9.7.3.4.4 1 .3 1.6z" fill="#003087"/>
+                <path d="M86.5 2.1l-2.6 16.7c-.1.3.2.6.5.6h2.8c.4 0 .8-.3.8-.7L90.6 2c.1-.3-.2-.6-.5-.6h-3.1c-.3 0-.5.3-.5.7z" fill="#003087"/>
+              </svg>
+            </div>
+
+            <!-- Visa -->
+            <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:6px 10px;display:flex;align-items:center;">
+              <svg width="44" height="16" viewBox="0 0 750 471" xmlns="http://www.w3.org/2000/svg">
+                <rect width="750" height="471" rx="40" fill="#1a1f71"/>
+                <path d="M278 334L311 140h53L331 334h-53zM524 144c-10-4-27-8-47-8-52 0-88 27-88 66 0 29 26 45 46 54 20 10 27 16 27 25 0 13-16 19-31 19-21 0-32-3-49-10l-7-3-7 44c12 5 34 10 57 10 55 0 91-27 91-69 0-23-14-41-46-55-19-9-31-15-31-24 0-8 10-17 32-17 18 0 31 4 41 8l5 2 7-42zM618 140h-40c-12 0-22 3-27 16l-78 178h55l11-30h67l6 30h49L618 140zm-65 122l21-56 5-14 3 14 9 56h-38zM232 140l-51 131-5-28c-10-32-40-67-74-84l47 175h56l83-194h-56z" fill="#fff"/>
+                <path d="M152 140H68l-1 5c66 16 109 56 127 103l-18-93c-3-12-13-15-24-15z" fill="#f9a533"/>
+              </svg>
+            </div>
+
+            <!-- Mastercard -->
+            <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:6px 10px;display:flex;align-items:center;">
+              <svg width="36" height="22" viewBox="0 0 131 88" xmlns="http://www.w3.org/2000/svg">
+                <rect x="44" y="9" width="43" height="70" fill="#ff5f00"/>
+                <circle cx="28" cy="44" r="35" fill="#eb001b"/>
+                <circle cx="103" cy="44" r="35" fill="#f79e1b"/>
+              </svg>
+            </div>
+
+            <!-- Mercado Pago -->
+            <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:6px 10px;display:flex;align-items:center;gap:5px;">
+              <svg width="18" height="18" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="16" cy="16" r="16" fill="#00b1ea"/>
+                <path d="M8 16c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+                <path d="M13 13l3 3-3 3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span style="color:white;font-size:11px;font-weight:700;font-family:'Rajdhani',sans-serif;letter-spacing:0.5px;white-space:nowrap;">Mercado Pago</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-bottom" style="max-width:1400px;margin:0 auto;padding-top:24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;">
+    <p style="color:var(--text-dim);font-size:13px;">© 2025 TikiGames. Todos los derechos reservados.</p>
+    <a href="terminos.html" style="color:var(--text-dim);font-size:13px;transition:0.3s;" onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='var(--text-dim)'">Términos y Condiciones</a>
+    <div class="social-links">
+      <a class="social-btn" href="#" title="TikTok"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/></svg></a>
+      <a class="social-btn" href="#" title="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+      <a class="social-btn" href="https://discord.gg/FN569qsh2X" target="_blank" title="Discord"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg></a>
+    </div>
+  </div>
+</footer>
+
+<!-- MODAL CHECKOUT -->
+<div class="modal-overlay" id="modal-checkout">
+  <div class="modal" style="max-width:560px;max-height:90vh;overflow-y:auto;">
+    <button class="modal-close" onclick="cerrarYReiniciar()">✕</button>
+
+    <!-- STEP 1: Formulario -->
+    <div id="checkout-step-1">
+      <h2>Carreritas</h2>
+      <p class="subtitle">Elige tu plan, completa tus datos y elige cómo pagar</p>
+
+      <!-- Resumen -->
+      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <img src="../imagenes/juegos/carreritas_1_portada.jpg" style="width:56px;height:40px;object-fit:cover;border-radius:6px;" />
+          <div>
+            <div style="font-family:'Rajdhani',sans-serif;font-weight:700;">Carreritas</div>
+            <div style="font-size:12px;color:var(--text-dim);" id="resumen-label">Acceso permanente — Pago único</div>
+          </div>
+        </div>
+        <div style="font-family:'Orbitron',monospace;font-weight:700;color:var(--cyan);" id="resumen-price">$35 USD</div>
+      </div>
+
+      <!-- Selector de plan -->
+      <div style="margin-bottom:20px;">
+        <label style="font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--text-gray);display:block;margin-bottom:12px;">Elige tu plan</label>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+          <div class="plan-option active" id="plan-permanente" onclick="selectPlan('permanente')">
+            <div class="plan-title">Permanente</div>
+            <div class="plan-price">$35 USD</div>
+          </div>
+          <div class="plan-option plan-tooltip-wrap" id="plan-prueba" onclick="selectPlan('prueba')">
+            <div class="plan-title">Prueba 1 día</div>
+            <div class="plan-price">$2 USD</div>
+            <div class="plan-tooltip">Prueba el juego por 24 horas antes de decidirte por el plan permanente. Este juego no tiene prueba gratuita.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Datos personales -->
+      <div class="form-group">
+        <label>Nombre completo</label>
+        <input type="text" class="form-control" id="buyer-name" placeholder="Tu nombre completo" />
+      </div>
+      <div class="form-group">
+        <label>Correo electrónico</label>
+        <input type="email" class="form-control" id="buyer-email" placeholder="tu@correo.com" />
+      </div>
+
+      <!-- Método de pago -->
+      <div style="margin-bottom:20px;">
+        <label style="font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--text-gray);display:block;margin-bottom:12px;">Método de pago</label>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <label class="pay-method active" id="pay-paypal" onclick="selectMethod('paypal')">
+            <input type="radio" name="payment" value="paypal" checked style="display:none;" />
+            PayPal
+          </label>
+          <label class="pay-method" id="pay-card" onclick="selectMethod('card')">
+            <input type="radio" name="payment" value="card" style="display:none;" />
+            Tarjeta crédito / débito
+          </label>
+        </div>
+      </div>
+
+      <!-- Bloque PayPal — Botones oficiales -->
+      <div id="paypal-info" style="margin-bottom:20px;">
+        <p style="font-size:13px;color:var(--text-gray);line-height:1.7;margin-bottom:16px;">
+          Completa el pago de forma segura con PayPal. Puedes pagar con tu cuenta PayPal o directamente con tarjeta de crédito/débito sin tener cuenta.
+        </p>
+        <!-- Botón oficial — Plan permanente $35 -->
+        <div id="paypal-container-permanente" style="min-height:50px;"></div>
+        <!-- Botón oficial — Prueba 1 día $2 -->
+        <div id="paypal-container-prueba" style="min-height:50px;display:none;"></div>
+      </div>
+
+      <!-- Bloque Tarjeta — ePayco + transferencia manual -->
+      <div id="card-info" style="display:none;margin-bottom:20px;">
+        <div style="background:rgba(0,240,255,0.06);border:1px solid rgba(0,240,255,0.2);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:14px;">
+          <p style="font-size:12.5px;color:var(--text-gray);line-height:1.6;margin:0;">
+            Paga de forma segura con tarjeta de crédito o débito a través de <strong style="color:white;">ePayco</strong>. El dinero se deposita directamente en la cuenta Bancolombia de TikiGames.
+          </p>
+        </div>
+        <button class="btn btn-primary btn-lg" style="width:100%;justify-content:center;margin-bottom:14px;" onclick="pagarConEpayco()">
+          Pagar con tarjeta (ePayco)
+        </button>
+
+        <details>
+          <summary style="cursor:pointer;font-size:12.5px;color:var(--text-dim);">¿Prefieres hacer una transferencia manual?</summary>
+          <div style="background:rgba(255,215,0,0.06);border:1px solid rgba(255,215,0,0.2);border-radius:var(--radius-sm);padding:12px 16px;margin-top:10px;">
+            <p style="font-size:12px;color:var(--text-gray);line-height:1.6;">
+              Realiza una transferencia o depósito a la siguiente cuenta Bancolombia y adjunta el comprobante en el correo que recibirás.
+            </p>
+            <div style="margin-top:10px;display:flex;flex-direction:column;gap:4px;">
+              <span style="font-size:13px;color:var(--text-dim);">Titular: <strong style="color:white;">Laura Jimena Parra Giraldo</strong></span>
+              <span style="font-size:13px;color:var(--text-dim);">Cuenta Ahorros Bancolombia: <strong style="color:var(--cyan);font-family:'Rajdhani',sans-serif;font-size:15px;">16868815969</strong></span>
+              <span style="font-size:13px;color:var(--text-dim);" id="card-valor">Valor: <strong style="color:white;">$35 USD (equivalente en COP del día)</strong></span>
+            </div>
+            <button id="pay-btn" class="btn btn-outline" style="width:100%;justify-content:center;margin-top:14px;" onclick="procesarPago()">
+              Ya realicé la transferencia
+            </button>
+          </div>
+        </details>
+      </div>
+
+      <!-- Total -->
+      <div style="background:rgba(0,240,255,0.05);border:1px solid rgba(0,240,255,0.2);border-radius:var(--radius-sm);padding:12px;display:flex;justify-content:space-between;margin-bottom:16px;">
+        <span style="color:var(--text-gray);font-size:14px;" id="total-label">Total a pagar (pago único)</span>
+        <span style="font-family:'Orbitron',monospace;font-weight:700;color:var(--cyan);" id="total-price">$35 USD</span>
+      </div>
+
+      <!-- Logos pago -->
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:16px;padding:10px;background:var(--bg-card);border-radius:var(--radius-sm);">
+        <span style="font-size:11px;color:var(--text-dim);margin-right:4px;">Pago seguro:</span>
+        <svg width="50" height="14" viewBox="0 0 101 27" fill="none"><path d="M11.8 1.6H5.5C5.1 1.6 4.7 1.9 4.6 2.3L2 18.8c-.1.3.2.6.5.6h3.2c.4 0 .8-.3.8-.7l.7-4.4c.1-.4.4-.7.8-.7h2.1c4.4 0 7-2.1 7.6-6.3.3-1.8 0-3.2-.8-4.2-.9-1-2.5-1.5-4.1-1.5zm.8 6.2c-.4 2.4-2.2 2.4-3.9 2.4h-1l.7-4.3c0-.3.3-.4.5-.4h.4c1.2 0 2.3 0 2.9.7.3.4.5 1 .4 1.6z" fill="#009cde"/><path d="M32.5 7.7h-3.2c-.3 0-.5.2-.5.4l-.1.9-.2-.3c-.7-1-2.1-1.3-3.6-1.3-3.4 0-6.3 2.6-6.9 6.2-.3 1.8.1 3.5 1.1 4.7 1 1.1 2.3 1.5 3.9 1.5 2.7 0 4.2-1.7 4.2-1.7l-.1.9c-.1.3.2.6.5.6h2.9c.4 0 .8-.3.8-.7l1.7-10.5c.1-.3-.2-.7-.5-.7zm-4.5 6c-.3 1.8-1.7 3-3.5 3-.9 0-1.6-.3-2.1-.8-.4-.6-.6-1.4-.5-2.2.3-1.8 1.7-3 3.5-3 .9 0 1.6.3 2.1.9.5.5.6 1.3.5 2.1z" fill="#009cde"/><path d="M50.7 7.7h-3.2c-.3 0-.6.2-.8.4l-4.6 6.8-2-6.5c-.1-.4-.5-.7-.9-.7h-3.1c-.4 0-.6.4-.5.7l3.7 10.9-3.5 4.9c-.3.4 0 .9.4.9h3.2c.3 0 .6-.2.8-.4L51.1 8.6c.2-.4-.1-.9-.4-.9z" fill="#003087"/><path d="M61.7 1.6h-6.3c-.4 0-.8.3-.8.7L52 18.8c-.1.3.2.6.5.6h3.4c.3 0 .5-.2.6-.5l.7-4.6c.1-.4.4-.7.8-.7h2.1c4.4 0 7-2.1 7.6-6.3.3-1.8 0-3.2-.8-4.2-1-1-2.5-1.5-4.2-1.5zm.8 6.2c-.4 2.4-2.2 2.4-3.9 2.4h-1l.7-4.3c0-.3.3-.4.5-.4h.5c1.2 0 2.3 0 2.9.7.3.4.4 1 .3 1.6z" fill="#003087"/><path d="M86.5 2.1l-2.6 16.7c-.1.3.2.6.5.6h2.8c.4 0 .8-.3.8-.7L90.6 2c.1-.3-.2-.6-.5-.6h-3.1c-.3 0-.5.3-.5.7z" fill="#003087"/></svg>
+        <svg width="32" height="12" viewBox="0 0 750 471"><rect width="750" height="471" rx="40" fill="#1a1f71"/><path d="M278 334L311 140h53L331 334h-53zM524 144c-10-4-27-8-47-8-52 0-88 27-88 66 0 29 26 45 46 54 20 10 27 16 27 25 0 13-16 19-31 19-21 0-32-3-49-10l-7-3-7 44c12 5 34 10 57 10 55 0 91-27 91-69 0-23-14-41-46-55-19-9-31-15-31-24 0-8 10-17 32-17 18 0 31 4 41 8l5 2 7-42zM232 140l-51 131-5-28c-10-32-40-67-74-84l47 175h56l83-194h-56z" fill="#fff"/><path d="M152 140H68l-1 5c66 16 109 56 127 103l-18-93c-3-12-13-15-24-15z" fill="#f9a533"/></svg>
+        <svg width="26" height="18" viewBox="0 0 131 88"><rect x="44" y="9" width="43" height="70" fill="#ff5f00"/><circle cx="28" cy="44" r="35" fill="#eb001b"/><circle cx="103" cy="44" r="35" fill="#f79e1b"/></svg>
+      </div>
+
+      <p style="text-align:center;margin-top:12px;font-size:12px;color:var(--text-dim);">
+        Transacción segura. Recibirás confirmación por correo tras el pago.
+      </p>
+    </div>
+
+    <!-- STEP 2: Confirmación PayPal -->
+    <div id="checkout-step-2" style="display:none;text-align:center;padding:20px 0;">
+      <div style="width:72px;height:72px;border-radius:50%;background:rgba(0,112,240,0.1);border:2px solid #0070f0;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#0070f0" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h2 style="color:var(--cyan);margin-bottom:8px;">Pago iniciado en PayPal</h2>
+      <p style="color:var(--text-gray);line-height:1.7;margin-bottom:16px;">
+        Completa el pago de <strong style="color:white;" id="step2-amount">$35 USD</strong> en la ventana de PayPal que se abrió.<br>
+        Una vez confirmado, recibirás el juego y los archivos en tu correo.
+      </p>
+      <button class="btn btn-outline" style="margin:0 auto;" onclick="cerrarYReiniciar()">Cerrar</button>
+    </div>
+
+    <!-- STEP 3: Confirmación Transferencia manual -->
+    <div id="checkout-step-3" style="display:none;text-align:center;padding:20px 0;">
+      <div style="width:72px;height:72px;border-radius:50%;background:rgba(0,240,255,0.08);border:2px solid var(--cyan);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h2 style="color:var(--cyan);margin-bottom:8px;">Datos registrados</h2>
+      <p style="color:var(--text-gray);line-height:1.7;margin-bottom:16px;">
+        Para completar tu compra, realiza la transferencia de <strong style="color:white;" id="step3-amount">$35 USD</strong> a:
+      </p>
+      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;margin-bottom:20px;text-align:left;">
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <span style="font-size:13px;color:var(--text-dim);">Titular: <strong style="color:white;">Laura Jimena Parra Giraldo</strong></span>
+          <span style="font-size:13px;color:var(--text-dim);">Banco: <strong style="color:white;">Bancolombia</strong></span>
+          <span style="font-size:13px;color:var(--text-dim);">Tipo: <strong style="color:white;">Cuenta de Ahorros</strong></span>
+          <span style="font-size:13px;color:var(--text-dim);">Número: <strong style="color:var(--cyan);font-family:'Rajdhani',sans-serif;font-size:18px;letter-spacing:1px;">16868815969</strong></span>
+        </div>
+      </div>
+      <p style="font-size:13px;color:var(--text-gray);margin-bottom:20px;">
+        Una vez hagas la transferencia, envía la foto o captura del comprobante junto con tu nombre al correo
+        <strong style="color:var(--cyan);">soporte.tikigames@gmail.com</strong>.
+        En cuanto lo confirmemos, te enviaremos el juego a tu correo.
+      </p>
+      <button class="btn btn-outline" style="margin:0 auto;" onclick="cerrarYReiniciar()">Cerrar</button>
+    </div>
+
+    <!-- STEP 4: Confirmación ePayco -->
+    <div id="checkout-step-epayco" style="display:none;text-align:center;padding:20px 0;">
+      <div style="width:72px;height:72px;border-radius:50%;background:rgba(0,240,255,0.08);border:2px solid var(--cyan);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h2 style="color:var(--cyan);margin-bottom:8px;">¡Pago aprobado!</h2>
+      <p style="color:var(--text-gray);line-height:1.7;margin-bottom:20px;">
+        Tu pago con tarjeta fue procesado exitosamente por ePayco. En las próximas horas recibirás el juego y los archivos en tu correo.
+      </p>
+      <button class="btn btn-outline" style="margin:0 auto;" onclick="cerrarYReiniciar()">Cerrar</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODAL LOGIN -->
+<div class="modal-overlay" id="modal-login">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-login')">✕</button>
+    <h2>Iniciar Sesión</h2>
+    <p class="subtitle">Bienvenido de vuelta a TikiGames</p>
+    <div class="form-group"><label>Correo</label><input type="email" class="form-control" placeholder="tu@correo.com" /></div>
+    <div class="form-group"><label>Contraseña</label><input type="password" class="form-control" placeholder="••••••••" /></div>
+    <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="closeModal('modal-login');showToast('Bienvenido','','')">Entrar</button>
+  </div>
+</div>
+
+<!-- SEARCH OVERLAY -->
+<div class="search-overlay" id="search-overlay">
+  <button data-search-close style="position:absolute;top:30px;right:40px;font-size:28px;color:var(--text-gray);">✕</button>
+  <div class="search-input-wrap">
+    <input class="search-big" type="text" placeholder="Buscar juegos..." />
+    <span class="search-big-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span>
+  </div>
+</div>
+
+<style>
+.pay-method {
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  padding:12px;background:var(--bg-card);border:2px solid var(--border);
+  border-radius:var(--radius-sm);cursor:pointer;
+  font-family:'Rajdhani',sans-serif;font-weight:600;font-size:14px;
+  transition:var(--transition);
+}
+.pay-method:hover { border-color:var(--text-gray); }
+.pay-method.active { border-color:var(--cyan);color:var(--cyan);background:rgba(0,240,255,0.08); }
+
+.plan-option {
+  position:relative;text-align:center;cursor:pointer;
+  padding:12px 8px;background:var(--bg-card);border:2px solid var(--border);
+  border-radius:var(--radius-sm);transition:var(--transition);
+}
+.plan-option:hover { border-color:var(--text-gray); }
+.plan-option.active { border-color:var(--cyan);background:rgba(0,240,255,0.08); }
+.plan-title { font-family:'Rajdhani',sans-serif;font-weight:700;font-size:13px;color:var(--text-white);margin-bottom:2px; }
+.plan-option.active .plan-title { color:var(--cyan); }
+.plan-price { font-family:'Orbitron',monospace;font-size:12px;color:var(--text-dim); }
+.plan-option.active .plan-price { color:var(--cyan); }
+.plan-tooltip {
+  position:absolute; bottom:calc(100% + 8px); left:50%; transform:translateX(-50%) translateY(6px);
+  width:200px; background:var(--bg-secondary); border:1px solid var(--cyan); border-radius:var(--radius-sm);
+  padding:10px 12px; font-size:11.5px; line-height:1.5; color:var(--text-gray);
+  box-shadow:0 8px 24px rgba(0,0,0,0.4); opacity:0; pointer-events:none;
+  transition:opacity 0.2s ease, transform 0.2s ease; z-index:30;
+}
+.plan-tooltip-wrap:hover .plan-tooltip { opacity:1; transform:translateX(-50%) translateY(0); }
+
+.trial-pill-btn {
+  background:transparent;border:1px dashed #ffd700;color:#ffd700;border-radius:999px;
+  padding:7px 18px;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:12.5px;
+  letter-spacing:0.5px;cursor:pointer;transition:var(--transition);
+}
+.trial-pill-btn:hover { background:rgba(255,215,0,0.12);border-style:solid;box-shadow:0 0 14px rgba(255,215,0,0.3); }
+.trial-btn-wrap { position:relative; }
+.trial-btn-wrap .side-tooltip {
+  position:absolute; bottom:calc(100% + 8px); left:50%; transform:translateX(-50%) translateY(6px);
+  width:240px; background:var(--bg-secondary); border:1px solid #ffd700; border-radius:var(--radius-sm);
+  padding:10px 12px; font-size:12px; line-height:1.5; color:var(--text-gray);
+  box-shadow:0 8px 24px rgba(0,0,0,0.4); opacity:0; pointer-events:none;
+  transition:opacity 0.2s ease, transform 0.2s ease; z-index:25;
+}
+.trial-btn-wrap:hover .side-tooltip { opacity:1; transform:translateX(-50%) translateY(0); }
+
+/* Forzar que cualquier overlay/iframe de pasarelas de pago permita scroll completo, incluso en pantallas cortas */
+iframe[src*="epayco"], div[class*="epayco"], div[id*="epayco"] {
+  max-height: 100vh !important;
+  overflow-y: auto !important;
+}
+html, body { height: auto !important; }
+</style>
+
+<script src="../js/navbar.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/animations.js"></script>
+<script src="../js/ui.js"></script>
+<script src="../js/lang.js"></script>
+<script>
+// ─── EmailJS: configuración para envío automático de correos ──
+const EMAILJS_PUBLIC_KEY          = 'hCji3MRPS1jUo_Evq';
+const EMAILJS_SERVICE_ID          = 'service_7nzw2z9';
+const EMAILJS_TEMPLATE_COMPROBANTE = 'template_681w5sd';
+const EMAILJS_TEMPLATE_AVISO       = 'template_d5cm63g';
+const emailjsListo = () => window.emailjs && !EMAILJS_PUBLIC_KEY.startsWith('TU_');
+if (emailjsListo()) emailjs.init(EMAILJS_PUBLIC_KEY);
+
+// ─── Carrusel con loop infinito suave ───────────
+let currentSlide = 0;
+const REAL_SLIDES = 4;
+const track = document.getElementById('carousel-track');
+
+function updateCarousel(animated = true) {
+  track.style.transition = animated ? 'transform 0.55s cubic-bezier(0.4,0,0.2,1)' : 'none';
+  track.style.transform  = `translateX(-${currentSlide * 20}%)`;
+  const dotIdx = currentSlide % REAL_SLIDES;
+  document.querySelectorAll('#carousel-dots span').forEach((d, i) => {
+    d.style.background = i === dotIdx ? 'var(--red)' : 'rgba(255,255,255,0.2)';
+    d.style.transform  = i === dotIdx ? 'scale(1.3)' : 'scale(1)';
+  });
+}
+function moveCarousel(dir) {
+  currentSlide += dir;
+  updateCarousel(true);
+  if (currentSlide === REAL_SLIDES) { setTimeout(() => { currentSlide = 0; updateCarousel(false); }, 560); }
+  if (currentSlide < 0) { currentSlide = REAL_SLIDES - 1; updateCarousel(true); }
+}
+function goToSlide(idx) { currentSlide = idx; updateCarousel(true); }
+updateCarousel(false);
+
+let autoPlay = setInterval(() => moveCarousel(1), 3000);
+const carouselEl = document.getElementById('game-carousel');
+carouselEl.addEventListener('mouseenter', () => clearInterval(autoPlay));
+carouselEl.addEventListener('mouseleave', () => { autoPlay = setInterval(() => moveCarousel(1), 3000); });
+let touchStartX = 0;
+carouselEl.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+carouselEl.addEventListener('touchend',   e => { const diff = touchStartX - e.changedTouches[0].clientX; if (Math.abs(diff) > 40) moveCarousel(diff > 0 ? 1 : -1); });
+
+// ─── Abrir checkout con un plan preseleccionado ──
+function abrirCheckoutConPlan(plan) {
+  openModal('modal-checkout');
+  setTimeout(() => { selectPlan(plan); }, 200);
+}
+window.abrirCheckoutConPlan = abrirCheckoutConPlan;
+
+// ─── Contador dinámico de reseñas (siempre coincide con las tarjetas reales) ──
+document.addEventListener('DOMContentLoaded', () => {
+  const total = document.querySelectorAll('#reviews-list .review-item').length;
+  const el = document.getElementById('review-count-text');
+  if (el && total > 0) el.textContent = 'Valorado por ' + total + (total === 1 ? ' persona' : ' personas');
+});
+
+// ─── Definición de planes (Carreritas: solo permanente y prueba de 1 día, sin prueba gratis) ──
+const PLAN_INFO = {
+  permanente: { usd: 35, cop: 117000, resumenLabel: 'Acceso permanente — Pago único', resumenPrice: '$35 USD', totalLabel: 'Total a pagar (pago único)', valorLabel: '$35 USD (equivalente en COP del día)' },
+  prueba:     { usd: 2,  cop: 7000,   resumenLabel: 'Prueba de 1 día — Pago único',    resumenPrice: '$2 USD',  totalLabel: 'Total a pagar (prueba 1 día)', valorLabel: '$2 USD (equivalente en COP del día)' }
+};
+let currentPlan = 'permanente';
+
+function selectPlan(plan) {
+  currentPlan = plan;
+  document.querySelectorAll('.plan-option').forEach(el => el.classList.remove('active'));
+  document.getElementById('plan-' + plan).classList.add('active');
+  renderPayPalButtons();
+
+  const info = PLAN_INFO[plan];
+  document.getElementById('resumen-label').textContent = info.resumenLabel;
+  document.getElementById('resumen-price').innerHTML   = info.resumenPrice;
+  document.getElementById('total-label').textContent   = info.totalLabel;
+  document.getElementById('total-price').textContent   = '$' + info.usd + ' USD';
+  document.getElementById('card-valor').innerHTML      = 'Valor: <strong style="color:white;">' + info.valorLabel + '</strong>';
+
+  // PayPal: mostrar el contenedor del botón oficial correspondiente al plan
+  document.getElementById('paypal-container-permanente').style.display = plan === 'permanente' ? 'block' : 'none';
+  document.getElementById('paypal-container-prueba').style.display     = plan === 'prueba'     ? 'block' : 'none';
+}
+
+// ─── Método de pago dinámico ────────────────────
+function selectMethod(method) {
+  document.querySelectorAll('.pay-method').forEach(l => l.classList.remove('active'));
+  document.getElementById('pay-' + method).classList.add('active');
+  const isCard = method === 'card';
+  document.getElementById('paypal-info').style.display = isCard ? 'none'  : 'block';
+  document.getElementById('card-info').style.display   = isCard ? 'block' : 'none';
+}
+
+// ─── Botones oficiales de PayPal (Hosted Buttons) ──
+// ⚠️ PENDIENTE: reemplazar estos 2 IDs por los reales cuando Laura los cree en PayPal
+// (PayPal → Herramientas para empresas → Botones de pago → crear uno de $35 y otro de $2)
+const PAYPAL_BUTTON_ID_PERMANENTE = 'TU_ID_PERMANENTE_CARRERITAS';
+const PAYPAL_BUTTON_ID_PRUEBA     = 'TU_ID_PRUEBA_CARRERITAS';
+
+function renderPayPalButtons() {
+  if (typeof paypal === 'undefined') return;
+
+  if (!PAYPAL_BUTTON_ID_PERMANENTE.startsWith('TU_') && !document.getElementById('paypal-container-permanente').children.length) {
+    paypal.HostedButtons({
+      hostedButtonId: PAYPAL_BUTTON_ID_PERMANENTE,
+      onApprove: function () {
+        const datos = validarDatosPersonales() || { nombre: 'Cliente', email: document.getElementById('buyer-email').value.trim() };
+        currentPlan = 'permanente';
+        document.getElementById('step2-amount').textContent = '$35 USD';
+        document.getElementById('checkout-step-1').style.display = 'none';
+        document.getElementById('checkout-step-2').style.display = 'block';
+        if (datos.email) enviarComprobante(datos.nombre, datos.email, 'paypal');
+      }
+    }).render('#paypal-container-permanente');
+  }
+
+  if (!PAYPAL_BUTTON_ID_PRUEBA.startsWith('TU_') && !document.getElementById('paypal-container-prueba').children.length) {
+    paypal.HostedButtons({
+      hostedButtonId: PAYPAL_BUTTON_ID_PRUEBA,
+      onApprove: function () {
+        const datos = validarDatosPersonales() || { nombre: 'Cliente', email: document.getElementById('buyer-email').value.trim() };
+        currentPlan = 'prueba';
+        document.getElementById('step2-amount').textContent = '$2 USD';
+        document.getElementById('checkout-step-1').style.display = 'none';
+        document.getElementById('checkout-step-2').style.display = 'block';
+        if (datos.email) enviarComprobante(datos.nombre, datos.email, 'paypal');
+      }
+    }).render('#paypal-container-prueba');
+  }
+}
+
+// ─── Comprobante email ───────────────────────────
+function enviarComprobante(nombre, email, metodo) {
+  const info   = PLAN_INFO[currentPlan] || PLAN_INFO.permanente;
+  const fecha  = new Date().toLocaleDateString('es-CO', { year:'numeric', month:'long', day:'numeric' });
+  const hora   = new Date().toLocaleTimeString('es-CO', { hour:'2-digit', minute:'2-digit' });
+  const metodoTexto = metodo === 'paypal' ? 'PayPal' : metodo === 'epayco' ? 'Tarjeta (ePayco)' : 'Transferencia Bancolombia';
+  const notaVigencia = currentPlan === 'permanente'
+    ? 'Tu acceso es permanente: no necesitas volver a pagar por este juego.'
+    : 'Tu acceso de prueba está activo por 24 horas desde este pago. Si quieres seguir disfrutando el juego sin límite de tiempo, puedes obtener el plan permanente por $35 USD desde tikigames.shop.';
+  const asuntoTexto = 'Comprobante de compra - Carreritas';
+  const cuerpoTexto =
+`Hola ${nombre},
+
+Gracias por tu compra en TikiGames. Aquí está tu comprobante:
+
+Juego: Carreritas
+Plan: ${currentPlan === 'permanente' ? 'Acceso permanente' : 'Prueba de 1 día'}
+Fecha: ${fecha} a las ${hora}
+Monto: $${info.usd} USD
+Método: ${metodoTexto}
+Estado: Pago registrado
+
+${notaVigencia}
+
+En las próximas horas recibirás en este mismo correo:
+- El juego Carreritas
+- Las licencias de uso
+- Los archivos necesarios para comenzar
+- Las instrucciones de integración con TikFinity
+
+Si tienes preguntas, responde este correo o escríbenos a soporte.tikigames@gmail.com
+
+¡Gracias por confiar en TikiGames!
+— El equipo de TikiGames`;
+
+  if (emailjsListo()) {
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_COMPROBANTE, {
+      to_email: email, nombre: nombre, asunto: asuntoTexto, mensaje: cuerpoTexto
+    }).catch(() => {
+      window.open(`mailto:${email}?subject=${encodeURIComponent(asuntoTexto)}&body=${encodeURIComponent(cuerpoTexto)}`);
+    });
+  } else {
+    window.open(`mailto:${email}?subject=${encodeURIComponent(asuntoTexto)}&body=${encodeURIComponent(cuerpoTexto)}`);
+  }
+}
+
+// ─── Validar datos personales (nombre y correo) ──
+function validarDatosPersonales() {
+  const nombreEl = document.getElementById('buyer-name');
+  const emailEl  = document.getElementById('buyer-email');
+  const nombre   = nombreEl.value.trim();
+  const email    = emailEl.value.trim();
+
+  let ok = true;
+  if (!nombre) {
+    nombreEl.style.borderColor = 'var(--red)';
+    nombreEl.style.boxShadow   = '0 0 0 3px rgba(255,0,80,0.15)';
+    nombreEl.placeholder = 'Este campo es obligatorio';
+    ok = false;
+  } else { nombreEl.style.borderColor = ''; nombreEl.style.boxShadow = ''; }
+
+  if (!email || !email.includes('@')) {
+    emailEl.style.borderColor = 'var(--red)';
+    emailEl.style.boxShadow   = '0 0 0 3px rgba(255,0,80,0.15)';
+    emailEl.placeholder = email ? 'Correo inválido' : 'Este campo es obligatorio';
+    ok = false;
+  } else { emailEl.style.borderColor = ''; emailEl.style.boxShadow = ''; }
+
+  return ok ? { nombre, email } : null;
+}
+
+// ─── Confirmar transferencia manual (Bancolombia) ──
+function procesarPago() {
+  const datos = validarDatosPersonales();
+  if (!datos) { showToast('Completa nombre y correo para continuar'); return; }
+
+  const info = PLAN_INFO[currentPlan] || PLAN_INFO.permanente;
+  document.getElementById('step3-amount').textContent = '$' + info.usd + ' USD';
+  document.getElementById('checkout-step-1').style.display = 'none';
+  document.getElementById('checkout-step-3').style.display = 'block';
+
+  // Aviso interno a soporte — el pago NO está confirmado aún, solo se avisa que alguien va a transferir
+  const mensaje = `Hola, ya realicé la transferencia de mi pago en TikiGames.\n\nJuego: Carreritas\nPlan: ${currentPlan === 'permanente' ? 'Permanente' : 'Prueba de 1 día'}\nMonto: $${info.usd} USD\n\nQuedo atento(a) a mis credenciales, el juego y los archivos.`;
+  if (emailjsListo()) {
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_AVISO, {
+      tipo: 'Transferencia manual - pago realizado', nombre: datos.nombre, email: datos.email, mensaje: mensaje, reply_to: datos.email
+    }).then(() => {
+      showToast('¡Aviso enviado!', 'Le avisamos a soporte que ya hiciste la transferencia');
+    }).catch(err => {
+      console.error('Aviso de transferencia no enviado:', err);
+      showToast('No se pudo avisar automáticamente', 'Escríbenos igual a soporte.tikigames@gmail.com');
+    });
+  }
+}
+
+// ─── Pagar con tarjeta vía ePayco ──────────────────
+const EPAYCO_PUBLIC_KEY = 'fbdeb364284d433f7ed1c75decdbcc30';
+
+function pagarConEpayco() {
+  const datos = validarDatosPersonales();
+  if (!datos) { showToast('Completa nombre y correo para continuar'); return; }
+  if (typeof ePayco === 'undefined') { showToast('No se pudo cargar ePayco, intenta de nuevo'); return; }
+  if (EPAYCO_PUBLIC_KEY.startsWith('TU_')) { showToast('ePayco aún no está configurado', 'Falta la llave pública'); return; }
+
+  const info    = PLAN_INFO[currentPlan] || PLAN_INFO.permanente;
+  const invoice = 'tikigames-carreritas-' + currentPlan + '-' + Date.now();
+
+  // Guardamos los datos para recuperarlos cuando ePayco regrese a esta página
+  sessionStorage.setItem('epayco_pending_carreritas', JSON.stringify({ nombre: datos.nombre, email: datos.email, plan: currentPlan }));
+
+  const handler = ePayco.checkout.configure({
+    key: EPAYCO_PUBLIC_KEY,
+    test: true // ⚠️ Modo de pruebas — cambiar a false cuando ePayco apruebe la cuenta (pagos reales)
+  });
+
+  document.body.style.overflow = '';
+
+  handler.open({
+    name: 'Carreritas',
+    description: currentPlan === 'permanente' ? 'Acceso permanente' : 'Prueba de 1 día',
+    invoice: invoice,
+    currency: 'cop',
+    amount: String(info.cop),
+    tax_base: '0',
+    tax: '0',
+    country: 'co',
+    lang: 'es',
+    external: 'false',
+    response: window.location.origin + window.location.pathname,
+    email_billing: datos.email,
+    name_billing: datos.nombre,
+  });
+}
+
+// ─── Detectar el regreso exitoso desde ePayco ──────
+function verificarRetornoEpayco() {
+  const params = new URLSearchParams(window.location.search);
+  const respuesta = params.get('x_response') || params.get('x_transaction_state');
+  const pendienteRaw = sessionStorage.getItem('epayco_pending_carreritas');
+  if (!respuesta || !pendienteRaw) return;
+
+  const pendiente = JSON.parse(pendienteRaw);
+  currentPlan = pendiente.plan;
+
+  if (respuesta.toLowerCase() === 'aceptada' || respuesta.toLowerCase() === 'approved') {
+    openModal('modal-checkout');
+    document.getElementById('checkout-step-1').style.display = 'none';
+    document.getElementById('checkout-step-epayco').style.display = 'block';
+    enviarComprobante(pendiente.nombre, pendiente.email, 'epayco');
+  } else {
+    showToast('El pago no se completó', 'Puedes intentarlo de nuevo');
+  }
+  sessionStorage.removeItem('epayco_pending_carreritas');
+  window.history.replaceState({}, document.title, window.location.pathname);
+}
+document.addEventListener('DOMContentLoaded', verificarRetornoEpayco);
+
+// ─── Reiniciar modal ─────────────────────────────
+function cerrarYReiniciar() {
+  document.getElementById('checkout-step-1').style.display = 'block';
+  ['checkout-step-2','checkout-step-3','checkout-step-epayco']
+    .forEach(id => { document.getElementById(id).style.display = 'none'; });
+  ['buyer-name','buyer-email']
+    .forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+  selectPlan('permanente');
+  selectMethod('paypal');
+  closeModal('modal-checkout');
+}
+window.cerrarYReiniciar = cerrarYReiniciar;
+
+document.addEventListener('DOMContentLoaded', () => {
+  const overlay = document.getElementById('modal-checkout');
+  if (overlay) overlay.addEventListener('click', e => { if (e.target === overlay) cerrarYReiniciar(); });
+});
+</script>
+</body>
+</html>
