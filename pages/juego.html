@@ -9,8 +9,6 @@
   <link rel="stylesheet" href="../css/components.css" />
   <link rel="stylesheet" href="../css/animations.css" />
   <link rel="icon" href="../imagenes/logo/favicon.png" />
-  <!-- ePayco Checkout -->
-  <script src="https://checkout.epayco.co/checkout.js"></script>
   <!-- PayPal SDK (Hosted Buttons) -->
   <script src="https://www.paypal.com/sdk/js?client-id=BAAz58YwiFdik4ODXr981asRsD709m_V4FUxgD73zckbYDBFHeUBKeJVZ8aWYMRHktTETWWhmEMKAz3zz8&components=hosted-buttons&disable-funding=venmo&currency=USD"></script>
   <!-- EmailJS (envío automático de correos) -->
@@ -264,10 +262,10 @@
 
         <div class="trial-btn-wrap" style="display:flex;justify-content:center;">
           <button class="trial-pill-btn" onclick="abrirCheckoutConPlan('prueba')">
-            ✨ Prueba 1 día gratis
+            🎯 Prueba 1 día — $2 USD
           </button>
           <div class="side-tooltip">
-            Tu primer día — 24 horas — es totalmente gratis. Si quieres un segundo día, tiene una súper oferta de solo <strong style="color:white;">$2 USD</strong>.
+            Prueba el juego por 24 horas antes de decidirte por un plan, por solo <strong style="color:white;">$2 USD</strong>. Este juego no tiene prueba gratuita.
           </div>
         </div>
 
@@ -306,35 +304,13 @@
               </svg>
             </div>
 
-            <!-- Visa -->
-            <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:6px 10px;display:flex;align-items:center;">
-              <svg width="44" height="16" viewBox="0 0 750 471" xmlns="http://www.w3.org/2000/svg">
-                <rect width="750" height="471" rx="40" fill="#1a1f71"/>
-                <path d="M278 334L311 140h53L331 334h-53zM524 144c-10-4-27-8-47-8-52 0-88 27-88 66 0 29 26 45 46 54 20 10 27 16 27 25 0 13-16 19-31 19-21 0-32-3-49-10l-7-3-7 44c12 5 34 10 57 10 55 0 91-27 91-69 0-23-14-41-46-55-19-9-31-15-31-24 0-8 10-17 32-17 18 0 31 4 41 8l5 2 7-42zM618 140h-40c-12 0-22 3-27 16l-78 178h55l11-30h67l6 30h49L618 140zm-65 122l21-56 5-14 3 14 9 56h-38zM232 140l-51 131-5-28c-10-32-40-67-74-84l47 175h56l83-194h-56z" fill="#fff"/>
-                <path d="M152 140H68l-1 5c66 16 109 56 127 103l-18-93c-3-12-13-15-24-15z" fill="#f9a533"/>
-              </svg>
-            </div>
-
-            <!-- Mastercard -->
-            <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:6px 10px;display:flex;align-items:center;">
-              <svg width="36" height="22" viewBox="0 0 131 88" xmlns="http://www.w3.org/2000/svg">
-                <rect x="44" y="9" width="43" height="70" fill="#ff5f00"/>
-                <circle cx="28" cy="44" r="35" fill="#eb001b"/>
-                <circle cx="103" cy="44" r="35" fill="#f79e1b"/>
-              </svg>
-            </div>
-
-            <!-- Mercado Pago -->
-            <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:6px 10px;display:flex;align-items:center;gap:5px;">
-              <svg width="18" height="18" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="16" cy="16" r="16" fill="#00b1ea"/>
-                <path d="M8 16c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
-                <path d="M13 13l3 3-3 3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-              <span style="color:white;font-size:11px;font-weight:700;font-family:'Rajdhani',sans-serif;letter-spacing:0.5px;white-space:nowrap;">Mercado Pago</span>
+            <!-- Nequi -->
+            <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:6px 12px;display:flex;align-items:center;">
+              <span style="color:#ff2e93;font-size:14px;font-weight:800;font-family:'Rajdhani',sans-serif;letter-spacing:0.5px;white-space:nowrap;">nequi</span>
             </div>
 
           </div>
+          <p style="font-size:11px;color:var(--text-dim);margin-top:10px;line-height:1.5;">¿Prefieres transferencia bancaria? Escríbenos a <a href="mailto:soporte.tikigames@gmail.com" style="color:var(--cyan);">soporte.tikigames@gmail.com</a></p>
         </div>
       </div>
     </div>
@@ -348,7 +324,7 @@
     <p style="color:var(--text-dim);font-size:13px;">© 2025 TikiGames. Todos los derechos reservados.</p>
     <a href="terminos.html" style="color:var(--text-dim);font-size:13px;transition:0.3s;" onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='var(--text-dim)'">Términos y Condiciones</a>
     <div class="social-links">
-      <a class="social-btn" href="#" title="TikTok"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/></svg></a>
+      <a class="social-btn" href="https://www.tiktok.com/@tikigames_shop?_r=1&_t=ZS-99DNceeyNfg" target="_blank" title="TikTok"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/></svg></a>
       <a class="social-btn" href="#" title="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
     </div>
   </div>
@@ -390,9 +366,9 @@
             <div class="plan-tooltip">Con esta opción vas a obtener este juego de manera permanente, sin necesidad de renovarlo cada mes.</div>
           </div>
           <div class="plan-option plan-tooltip-wrap" id="plan-prueba" onclick="selectPlan('prueba')">
-            <div class="plan-title">Prueba</div>
-            <div class="plan-price">Gratis</div>
-            <div class="plan-tooltip">Ten la oportunidad de probarlo antes de tenerlo: 24 horas completas totalmente gratis. Si quieres un segundo día, tiene una súper oferta de solo $2 USD.</div>
+            <div class="plan-title">Prueba 1 día</div>
+            <div class="plan-price">$2 USD</div>
+            <div class="plan-tooltip">Prueba el juego por 24 horas antes de decidirte por un plan, por solo $2 USD. Este juego no tiene prueba gratuita.</div>
           </div>
         </div>
       </div>
@@ -407,62 +383,20 @@
         <input type="email" class="form-control" id="buyer-email" placeholder="tu@correo.com" />
       </div>
 
-      <!-- Campos normales de pago (mensual / permanente) -->
+      <!-- Campos normales de pago (mensual / permanente / prueba) — solo PayPal -->
       <div id="normal-checkout-fields">
-
-        <!-- Método de pago -->
-        <div style="margin-bottom:20px;">
-          <label style="font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--text-gray);display:block;margin-bottom:12px;">Método de pago</label>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-            <label class="pay-method active" id="pay-paypal" onclick="selectMethod('paypal')">
-              <input type="radio" name="payment" value="paypal" checked style="display:none;" />
-              PayPal
-            </label>
-            <label class="pay-method" id="pay-card" onclick="selectMethod('card')">
-              <input type="radio" name="payment" value="card" style="display:none;" />
-              Tarjeta crédito / débito
-            </label>
-          </div>
-        </div>
 
         <!-- Bloque PayPal — Botones oficiales -->
         <div id="paypal-info" style="margin-bottom:20px;">
           <p style="font-size:13px;color:var(--text-gray);line-height:1.7;margin-bottom:16px;">
-            Completa el pago de forma segura con PayPal. Puedes pagar con tu cuenta PayPal o directamente con tarjeta de crédito/débito sin tener cuenta.
+            Completa el pago de forma segura con PayPal. Puedes pagar con tu cuenta PayPal, tarjeta de crédito/débito o Nequi vinculado a PayPal, sin necesidad de tener cuenta.
           </p>
           <!-- Botón oficial — Plan mensual $33 -->
           <div id="paypal-container-mensual" style="min-height:50px;"></div>
           <!-- Botón oficial — Plan permanente $45 -->
           <div id="paypal-container-permanente" style="min-height:50px;display:none;"></div>
-        </div>
-
-        <!-- Bloque Tarjeta — ePayco + transferencia manual -->
-        <div id="card-info" style="display:none;margin-bottom:20px;">
-          <div style="background:rgba(0,240,255,0.06);border:1px solid rgba(0,240,255,0.2);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:14px;">
-            <p style="font-size:12.5px;color:var(--text-gray);line-height:1.6;margin:0;">
-              Paga de forma segura con tarjeta de crédito o débito a través de <strong style="color:white;">ePayco</strong>. El dinero se deposita directamente en la cuenta Bancolombia de TikiGames.
-            </p>
-          </div>
-          <button class="btn btn-primary btn-lg" style="width:100%;justify-content:center;margin-bottom:14px;" onclick="pagarConEpayco()">
-            Pagar con tarjeta (ePayco)
-          </button>
-
-          <details>
-            <summary style="cursor:pointer;font-size:12.5px;color:var(--text-dim);">¿Prefieres hacer una transferencia manual?</summary>
-            <div style="background:rgba(255,215,0,0.06);border:1px solid rgba(255,215,0,0.2);border-radius:var(--radius-sm);padding:12px 16px;margin-top:10px;">
-              <p style="font-size:12px;color:var(--text-gray);line-height:1.6;">
-                Realiza una transferencia o depósito a la siguiente cuenta Bancolombia y adjunta el comprobante en el correo que recibirás.
-              </p>
-              <div style="margin-top:10px;display:flex;flex-direction:column;gap:4px;">
-                <span style="font-size:13px;color:var(--text-dim);">Titular: <strong style="color:white;">Laura Jimena Parra Giraldo</strong></span>
-                <span style="font-size:13px;color:var(--text-dim);">Cuenta Ahorros Bancolombia: <strong style="color:var(--cyan);font-family:'Rajdhani',sans-serif;font-size:15px;">16868815969</strong></span>
-                <span style="font-size:13px;color:var(--text-dim);" id="card-valor">Valor: <strong style="color:white;">$33 USD mensuales (equivalente en COP del día)</strong></span>
-              </div>
-              <button id="pay-btn" class="btn btn-outline" style="width:100%;justify-content:center;margin-top:14px;" onclick="procesarPago()">
-                Ya realicé la transferencia
-              </button>
-            </div>
-          </details>
+          <!-- Botón oficial — Prueba 1 día $2 -->
+          <div id="paypal-container-prueba" style="min-height:50px;display:none;"></div>
         </div>
 
         <!-- Total -->
@@ -472,32 +406,14 @@
         </div>
 
         <!-- Logos pago -->
-        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:16px;padding:10px;background:var(--bg-card);border-radius:var(--radius-sm);">
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:10px;padding:10px;background:var(--bg-card);border-radius:var(--radius-sm);">
           <span style="font-size:11px;color:var(--text-dim);margin-right:4px;">Pago seguro:</span>
           <svg width="50" height="14" viewBox="0 0 101 27" fill="none"><path d="M11.8 1.6H5.5C5.1 1.6 4.7 1.9 4.6 2.3L2 18.8c-.1.3.2.6.5.6h3.2c.4 0 .8-.3.8-.7l.7-4.4c.1-.4.4-.7.8-.7h2.1c4.4 0 7-2.1 7.6-6.3.3-1.8 0-3.2-.8-4.2-.9-1-2.5-1.5-4.1-1.5zm.8 6.2c-.4 2.4-2.2 2.4-3.9 2.4h-1l.7-4.3c0-.3.3-.4.5-.4h.4c1.2 0 2.3 0 2.9.7.3.4.5 1 .4 1.6z" fill="#009cde"/><path d="M32.5 7.7h-3.2c-.3 0-.5.2-.5.4l-.1.9-.2-.3c-.7-1-2.1-1.3-3.6-1.3-3.4 0-6.3 2.6-6.9 6.2-.3 1.8.1 3.5 1.1 4.7 1 1.1 2.3 1.5 3.9 1.5 2.7 0 4.2-1.7 4.2-1.7l-.1.9c-.1.3.2.6.5.6h2.9c.4 0 .8-.3.8-.7l1.7-10.5c.1-.3-.2-.7-.5-.7zm-4.5 6c-.3 1.8-1.7 3-3.5 3-.9 0-1.6-.3-2.1-.8-.4-.6-.6-1.4-.5-2.2.3-1.8 1.7-3 3.5-3 .9 0 1.6.3 2.1.9.5.5.6 1.3.5 2.1z" fill="#009cde"/><path d="M50.7 7.7h-3.2c-.3 0-.6.2-.8.4l-4.6 6.8-2-6.5c-.1-.4-.5-.7-.9-.7h-3.1c-.4 0-.6.4-.5.7l3.7 10.9-3.5 4.9c-.3.4 0 .9.4.9h3.2c.3 0 .6-.2.8-.4L51.1 8.6c.2-.4-.1-.9-.4-.9z" fill="#003087"/><path d="M61.7 1.6h-6.3c-.4 0-.8.3-.8.7L52 18.8c-.1.3.2.6.5.6h3.4c.3 0 .5-.2.6-.5l.7-4.6c.1-.4.4-.7.8-.7h2.1c4.4 0 7-2.1 7.6-6.3.3-1.8 0-3.2-.8-4.2-1-1-2.5-1.5-4.2-1.5zm.8 6.2c-.4 2.4-2.2 2.4-3.9 2.4h-1l.7-4.3c0-.3.3-.4.5-.4h.5c1.2 0 2.3 0 2.9.7.3.4.4 1 .3 1.6z" fill="#003087"/><path d="M86.5 2.1l-2.6 16.7c-.1.3.2.6.5.6h2.8c.4 0 .8-.3.8-.7L90.6 2c.1-.3-.2-.6-.5-.6h-3.1c-.3 0-.5.3-.5.7z" fill="#003087"/></svg>
-          <svg width="32" height="12" viewBox="0 0 750 471"><rect width="750" height="471" rx="40" fill="#1a1f71"/><path d="M278 334L311 140h53L331 334h-53zM524 144c-10-4-27-8-47-8-52 0-88 27-88 66 0 29 26 45 46 54 20 10 27 16 27 25 0 13-16 19-31 19-21 0-32-3-49-10l-7-3-7 44c12 5 34 10 57 10 55 0 91-27 91-69 0-23-14-41-46-55-19-9-31-15-31-24 0-8 10-17 32-17 18 0 31 4 41 8l5 2 7-42zM232 140l-51 131-5-28c-10-32-40-67-74-84l47 175h56l83-194h-56z" fill="#fff"/><path d="M152 140H68l-1 5c66 16 109 56 127 103l-18-93c-3-12-13-15-24-15z" fill="#f9a533"/></svg>
-          <svg width="26" height="18" viewBox="0 0 131 88"><rect x="44" y="9" width="43" height="70" fill="#ff5f00"/><circle cx="28" cy="44" r="35" fill="#eb001b"/><circle cx="103" cy="44" r="35" fill="#f79e1b"/></svg>
+          <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:4px 10px;display:flex;align-items:center;">
+            <span style="color:#ff2e93;font-size:13px;font-weight:800;font-family:'Rajdhani',sans-serif;">nequi</span>
+          </div>
         </div>
-      </div>
-
-      <!-- Campos de prueba gratis -->
-      <div id="trial-inline-fields" style="display:none;">
-        <div style="background:rgba(0,240,255,0.05);border:1px solid rgba(0,240,255,0.2);border-radius:var(--radius-sm);padding:14px 16px;margin-bottom:16px;">
-          <p style="font-size:13px;color:var(--text-gray);line-height:1.7;margin:0;">
-            Ten la oportunidad de probar este juego antes de tenerlo. Vas a disfrutar de <strong style="color:white;">24 horas completas</strong> con este maravilloso juego, junto a tu comunidad. Si quieres un segundo día, tiene una súper oferta de solo <strong style="color:white;">$2 USD</strong>.
-          </p>
-        </div>
-        <div class="form-group">
-          <label>Usuario de TikTok</label>
-          <input type="text" class="form-control" id="checkout-trial-tiktok" placeholder="@tuusuario" />
-        </div>
-        <label style="display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--text-gray);margin-bottom:20px;cursor:pointer;">
-          <input type="checkbox" id="checkout-trial-extra-day" style="margin-top:3px;" />
-          Quiero un segundo día de prueba (+$2 USD adicionales)
-        </label>
-        <button class="btn btn-primary btn-lg" style="width:100%;justify-content:center;" onclick="solicitarPruebaCheckout()">
-          Comenzar prueba gratis
-        </button>
+        <p style="font-size:11px;color:var(--text-dim);margin-bottom:16px;line-height:1.5;">¿Prefieres transferencia bancaria? Escríbenos a <a href="mailto:soporte.tikigames@gmail.com" style="color:var(--cyan);">soporte.tikigames@gmail.com</a></p>
       </div>
 
       <p style="text-align:center;margin-top:12px;font-size:12px;color:var(--text-dim);">
@@ -522,55 +438,6 @@
           paypal.me/DRodriguezCaicedo/33
         </a>
       </div>
-      <button class="btn btn-outline" style="margin:0 auto;" onclick="cerrarYReiniciar()">Cerrar</button>
-    </div>
-
-    <!-- STEP 3: Confirmación Transferencia manual -->
-    <div id="checkout-step-3" style="display:none;text-align:center;padding:20px 0;">
-      <div style="width:72px;height:72px;border-radius:50%;background:rgba(0,240,255,0.08);border:2px solid var(--cyan);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
-        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-      </div>
-      <h2 style="color:var(--cyan);margin-bottom:8px;">Datos registrados</h2>
-      <p style="color:var(--text-gray);line-height:1.7;margin-bottom:16px;">
-        Para completar tu compra, realiza la transferencia de <strong style="color:white;" id="step3-amount">$33 USD</strong> a:
-      </p>
-      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;margin-bottom:20px;text-align:left;">
-        <div style="display:flex;flex-direction:column;gap:6px;">
-          <span style="font-size:13px;color:var(--text-dim);">Titular: <strong style="color:white;">Laura Jimena Parra Giraldo</strong></span>
-          <span style="font-size:13px;color:var(--text-dim);">Banco: <strong style="color:white;">Bancolombia</strong></span>
-          <span style="font-size:13px;color:var(--text-dim);">Tipo: <strong style="color:white;">Cuenta de Ahorros</strong></span>
-          <span style="font-size:13px;color:var(--text-dim);">Número: <strong style="color:var(--cyan);font-family:'Rajdhani',sans-serif;font-size:18px;letter-spacing:1px;">16868815969</strong></span>
-        </div>
-      </div>
-      <p style="font-size:13px;color:var(--text-gray);margin-bottom:20px;">
-        Una vez hagas la transferencia, envía la foto o captura del comprobante junto con tu nombre al correo
-        <strong style="color:var(--cyan);">soporte.tikigames@gmail.com</strong>.
-        En cuanto lo confirmemos, te enviaremos el juego a tu correo.
-      </p>
-      <button class="btn btn-outline" style="margin:0 auto;" onclick="cerrarYReiniciar()">Cerrar</button>
-    </div>
-
-    <!-- STEP 4: Confirmación ePayco -->
-    <div id="checkout-step-epayco" style="display:none;text-align:center;padding:20px 0;">
-      <div style="width:72px;height:72px;border-radius:50%;background:rgba(0,240,255,0.08);border:2px solid var(--cyan);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
-        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-      </div>
-      <h2 style="color:var(--cyan);margin-bottom:8px;">¡Pago aprobado!</h2>
-      <p style="color:var(--text-gray);line-height:1.7;margin-bottom:20px;">
-        Tu pago con tarjeta fue procesado exitosamente por ePayco. En las próximas horas recibirás el juego y los archivos en tu correo.
-      </p>
-      <button class="btn btn-outline" style="margin:0 auto;" onclick="cerrarYReiniciar()">Cerrar</button>
-    </div>
-
-    <!-- STEP 5: Confirmación prueba gratis -->
-    <div id="checkout-step-trial" style="display:none;text-align:center;padding:20px 0;">
-      <div style="width:72px;height:72px;border-radius:50%;background:rgba(0,240,255,0.08);border:2px solid var(--cyan);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
-        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-      </div>
-      <h2 style="color:var(--cyan);margin-bottom:8px;">¡Solicitud enviada!</h2>
-      <p style="color:var(--text-gray);line-height:1.7;margin-bottom:16px;">
-        Se abrió tu correo con la solicitud de prueba gratis. Envíalo y activaremos tu acceso de 24 horas lo antes posible.
-      </p>
       <button class="btn btn-outline" style="margin:0 auto;" onclick="cerrarYReiniciar()">Cerrar</button>
     </div>
 
@@ -721,7 +588,8 @@ document.addEventListener('DOMContentLoaded', () => {
 // ─── Definición de planes ────────────────────────
 const PLAN_INFO = {
   mensual:    { usd: 33, cop: 110000, resumenLabel: 'Membresía mensual — Renovación manual', resumenPrice: '$33 USD<span style="font-size:11px;color:var(--text-dim);">/mes</span>', totalLabel: 'Total a pagar (mensual)', valorLabel: '$33 USD mensuales (equivalente en COP del día)' },
-  permanente: { usd: 45, cop: 150000, resumenLabel: 'Acceso permanente — Pago único', resumenPrice: '$45 USD', totalLabel: 'Total a pagar (pago único)', valorLabel: '$45 USD (equivalente en COP del día)' }
+  permanente: { usd: 45, cop: 150000, resumenLabel: 'Acceso permanente — Pago único', resumenPrice: '$45 USD', totalLabel: 'Total a pagar (pago único)', valorLabel: '$45 USD (equivalente en COP del día)' },
+  prueba:     { usd: 2,  cop: 7000,   resumenLabel: 'Prueba de 1 día — Pago único',    resumenPrice: '$2 USD',  totalLabel: 'Total a pagar (prueba 1 día)', valorLabel: '$2 USD (equivalente en COP del día)' }
 };
 let currentPlan = 'mensual';
 
@@ -731,41 +599,23 @@ function selectPlan(plan) {
   document.getElementById('plan-' + plan).classList.add('active');
   renderPayPalButtons();
 
-  const isTrial = plan === 'prueba';
-  document.getElementById('normal-checkout-fields').style.display = isTrial ? 'none' : 'block';
-  document.getElementById('trial-inline-fields').style.display    = isTrial ? 'block' : 'none';
-
-  if (isTrial) {
-    document.getElementById('resumen-label').textContent = 'Prueba gratis — 24 horas';
-    document.getElementById('resumen-price').textContent = 'Gratis';
-    return;
-  }
-
   const info = PLAN_INFO[plan];
   document.getElementById('resumen-label').textContent = info.resumenLabel;
   document.getElementById('resumen-price').innerHTML   = info.resumenPrice;
   document.getElementById('total-label').textContent   = info.totalLabel;
   document.getElementById('total-price').textContent   = '$' + info.usd + ' USD';
-  document.getElementById('card-valor').innerHTML      = 'Valor: <strong style="color:white;">' + info.valorLabel + '</strong>';
 
   // PayPal: mostrar el contenedor del botón oficial correspondiente al plan
   document.getElementById('paypal-container-mensual').style.display    = plan === 'mensual'    ? 'block' : 'none';
   document.getElementById('paypal-container-permanente').style.display = plan === 'permanente' ? 'block' : 'none';
-}
-
-// ─── Método de pago dinámico ────────────────────
-function selectMethod(method) {
-  document.querySelectorAll('.pay-method').forEach(l => l.classList.remove('active'));
-  document.getElementById('pay-' + method).classList.add('active');
-  const isCard = method === 'card';
-  document.getElementById('paypal-info').style.display = isCard ? 'none'  : 'block';
-  document.getElementById('card-info').style.display   = isCard ? 'block' : 'none';
+  document.getElementById('paypal-container-prueba').style.display     = plan === 'prueba'     ? 'block' : 'none';
 }
 
 // ─── Botones oficiales de PayPal (Hosted Buttons) ──
-// Reemplaza estos 2 IDs por los tuyos reales (PayPal → Botones de pago → cada botón tiene su propio ID)
+// Reemplaza estos 3 IDs por los tuyos reales (PayPal → Botones de pago → cada botón tiene su propio ID)
 const PAYPAL_BUTTON_ID_MENSUAL    = 'CKEAUNP5457F2';
 const PAYPAL_BUTTON_ID_PERMANENTE = 'LHGAARGYYJFZ2';
+const PAYPAL_BUTTON_ID_PRUEBA     = 'TU_ID_PRUEBA_MUNDIALITO';
 
 function renderPayPalButtons() {
   if (typeof paypal === 'undefined') return;
@@ -797,6 +647,20 @@ function renderPayPalButtons() {
       }
     }).render('#paypal-container-permanente');
   }
+
+  if (!PAYPAL_BUTTON_ID_PRUEBA.startsWith('TU_') && !document.getElementById('paypal-container-prueba').children.length) {
+    paypal.HostedButtons({
+      hostedButtonId: PAYPAL_BUTTON_ID_PRUEBA,
+      onApprove: function () {
+        const datos = validarDatosPersonales() || { nombre: 'Cliente', email: document.getElementById('buyer-email').value.trim() };
+        currentPlan = 'prueba';
+        document.getElementById('step2-amount').textContent = '$2 USD';
+        document.getElementById('checkout-step-1').style.display = 'none';
+        document.getElementById('checkout-step-2').style.display = 'block';
+        if (datos.email) enviarComprobante(datos.nombre, datos.email, 'paypal');
+      }
+    }).render('#paypal-container-prueba');
+  }
 }
 
 // ─── Comprobante email ───────────────────────────
@@ -804,18 +668,21 @@ function enviarComprobante(nombre, email, metodo) {
   const info   = PLAN_INFO[currentPlan] || PLAN_INFO.mensual;
   const fecha  = new Date().toLocaleDateString('es-CO', { year:'numeric', month:'long', day:'numeric' });
   const hora   = new Date().toLocaleTimeString('es-CO', { hour:'2-digit', minute:'2-digit' });
-  const metodoTexto = metodo === 'paypal' ? 'PayPal' : metodo === 'epayco' ? 'Tarjeta (ePayco)' : 'Transferencia Bancolombia';
+  const metodoTexto = 'PayPal';
   const notaVigencia = currentPlan === 'permanente'
     ? 'Tu acceso es permanente: no necesitas volver a pagar por este juego.'
+    : currentPlan === 'prueba'
+    ? 'Tu acceso de prueba está activo por 24 horas desde este pago. Si quieres seguir disfrutando el juego sin límite de tiempo, puedes obtener el plan mensual ($33 USD) o permanente ($45 USD) desde tikigames.shop.'
     : 'Tu membresía queda activa por 30 días desde la fecha de este pago. Para mantener el acceso, deberás repetir el pago de $33 USD antes de que se cumpla el mes, ingresando nuevamente a tikigames.shop.';
   const asuntoTexto = 'Comprobante de compra - Mundialito Torneo';
+  const planTexto = currentPlan === 'permanente' ? 'Acceso permanente' : currentPlan === 'prueba' ? 'Prueba de 1 día' : 'Membresía mensual';
   const cuerpoTexto =
 `Hola ${nombre},
 
 Gracias por tu compra en TikiGames. Aquí está tu comprobante:
 
 Juego: Mundialito Torneo
-Plan: ${currentPlan === 'permanente' ? 'Acceso permanente' : 'Membresía mensual'}
+Plan: ${planTexto}
 Fecha: ${fecha} a las ${hora}
 Monto: $${info.usd} USD
 Método: ${metodoTexto}
@@ -870,146 +737,13 @@ function validarDatosPersonales() {
   return ok ? { nombre, email } : null;
 }
 
-// ─── Confirmar transferencia manual (Bancolombia) ──
-function procesarPago() {
-  const datos = validarDatosPersonales();
-  if (!datos) { showToast('Completa nombre y correo para continuar'); return; }
-
-  const info = PLAN_INFO[currentPlan] || PLAN_INFO.mensual;
-  document.getElementById('step3-amount').textContent = '$' + info.usd + ' USD';
-  document.getElementById('checkout-step-1').style.display = 'none';
-  document.getElementById('checkout-step-3').style.display = 'block';
-
-  // Aviso interno a soporte — el pago NO está confirmado aún, solo se avisa que alguien va a transferir
-  const mensaje = `Hola, ya realicé la transferencia de mi pago en TikiGames.\n\nJuego: Mundialito Torneo\nPlan: ${currentPlan === 'permanente' ? 'Permanente' : 'Mensual'}\nMonto: $${info.usd} USD\n\nQuedo atento(a) a mis credenciales, el juego y los archivos.`;
-  if (emailjsListo()) {
-    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_AVISO, {
-      tipo: 'Transferencia manual - pago realizado', nombre: datos.nombre, email: datos.email, mensaje: mensaje, reply_to: datos.email
-    }).then(() => {
-      showToast('¡Aviso enviado!', 'Le avisamos a soporte que ya hiciste la transferencia');
-    }).catch(err => {
-      console.error('Aviso de transferencia no enviado:', err);
-      showToast('No se pudo avisar automáticamente', 'Escríbenos igual a soporte.tikigames@gmail.com');
-    });
-  }
-}
-
-// ─── Pagar con tarjeta vía ePayco ──────────────────
-// Reemplaza este valor por tu llave pública real de ePayco (Dashboard → Configuración → Llaves)
-const EPAYCO_PUBLIC_KEY = 'fbdeb364284d433f7ed1c75decdbcc30';
-
-function pagarConEpayco() {
-  const datos = validarDatosPersonales();
-  if (!datos) { showToast('Completa nombre y correo para continuar'); return; }
-  if (typeof ePayco === 'undefined') { showToast('No se pudo cargar ePayco, intenta de nuevo'); return; }
-  if (EPAYCO_PUBLIC_KEY.startsWith('TU_')) { showToast('ePayco aún no está configurado', 'Falta la llave pública'); return; }
-
-  const info    = PLAN_INFO[currentPlan] || PLAN_INFO.mensual;
-  const invoice = 'tikigames-' + currentPlan + '-' + Date.now();
-
-  // Guardamos los datos para recuperarlos cuando ePayco regrese a esta página
-  sessionStorage.setItem('epayco_pending', JSON.stringify({ nombre: datos.nombre, email: datos.email, plan: currentPlan }));
-
-  const handler = ePayco.checkout.configure({
-    key: EPAYCO_PUBLIC_KEY,
-    test: true // ⚠️ Modo de pruebas — cambiar a false cuando ePayco apruebe la cuenta (pagos reales)
-  });
-
-  document.body.style.overflow = '';
-
-  handler.open({
-    name: 'Mundialito Torneo',
-    description: currentPlan === 'permanente' ? 'Acceso permanente' : 'Membresía mensual',
-    invoice: invoice,
-    currency: 'cop',
-    amount: String(info.cop),
-    tax_base: '0',
-    tax: '0',
-    country: 'co',
-    lang: 'es',
-    external: 'false',
-    response: window.location.origin + window.location.pathname,
-    email_billing: datos.email,
-    name_billing: datos.nombre,
-  });
-}
-
-// ─── Detectar el regreso exitoso desde ePayco ──────
-function verificarRetornoEpayco() {
-  const params = new URLSearchParams(window.location.search);
-  const respuesta = params.get('x_response') || params.get('x_transaction_state');
-  const pendienteRaw = sessionStorage.getItem('epayco_pending');
-  if (!respuesta || !pendienteRaw) return;
-
-  const pendiente = JSON.parse(pendienteRaw);
-  currentPlan = pendiente.plan;
-
-  if (respuesta.toLowerCase() === 'aceptada' || respuesta.toLowerCase() === 'approved') {
-    openModal('modal-checkout');
-    document.getElementById('checkout-step-1').style.display = 'none';
-    document.getElementById('checkout-step-epayco').style.display = 'block';
-    enviarComprobante(pendiente.nombre, pendiente.email, 'epayco');
-  } else {
-    showToast('El pago no se completó', 'Puedes intentarlo de nuevo');
-  }
-  sessionStorage.removeItem('epayco_pending');
-  window.history.replaceState({}, document.title, window.location.pathname);
-}
-document.addEventListener('DOMContentLoaded', verificarRetornoEpayco);
-
-// ─── Solicitud de prueba gratis dentro del checkout ──
-function solicitarPruebaCheckout() {
-  const datos = validarDatosPersonales();
-  const tiktokEl = document.getElementById('checkout-trial-tiktok');
-  const tiktok   = tiktokEl.value.trim();
-  const extra    = document.getElementById('checkout-trial-extra-day').checked;
-
-  if (!tiktok) {
-    tiktokEl.style.borderColor = 'var(--red)';
-    tiktokEl.style.boxShadow   = '0 0 0 3px rgba(255,0,80,0.15)';
-    tiktokEl.placeholder = 'Este campo es obligatorio';
-  } else { tiktokEl.style.borderColor = ''; tiktokEl.style.boxShadow = ''; }
-
-  if (!datos || !tiktok) { showToast('Completa tu nombre, correo y usuario de TikTok'); return; }
-
-  const asuntoTexto = 'Solicitud de prueba gratis — Mundialito Torneo';
-  const cuerpoTexto =
-`Hola equipo de TikiGames,
-
-Quiero activar mi prueba gratis de 24 horas de Mundialito Torneo.
-
-Nombre: ${datos.nombre}
-Usuario de TikTok: ${tiktok}
-Correo de contacto: ${datos.email}
-Día adicional de prueba (+$2 USD): ${extra ? 'Sí, quiero un segundo día' : 'No, solo el día gratis'}
-
-Quedo atento a la activación.`;
-
-  if (emailjsListo()) {
-    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_AVISO, {
-      tipo: 'Prueba gratis', nombre: datos.nombre, email: datos.email, mensaje: cuerpoTexto, reply_to: datos.email
-    }).catch(() => {
-      window.open(`mailto:soporte.tikigames@gmail.com?subject=${encodeURIComponent(asuntoTexto)}&body=${encodeURIComponent(cuerpoTexto)}`);
-    });
-  } else {
-    window.open(`mailto:soporte.tikigames@gmail.com?subject=${encodeURIComponent(asuntoTexto)}&body=${encodeURIComponent(cuerpoTexto)}`);
-  }
-
-  document.getElementById('checkout-step-1').style.display = 'none';
-  document.getElementById('checkout-step-trial').style.display = 'block';
-}
-
 // ─── Reiniciar modal ─────────────────────────────
 function cerrarYReiniciar() {
   document.getElementById('checkout-step-1').style.display = 'block';
-  ['checkout-step-2','checkout-step-3','checkout-step-epayco','checkout-step-trial']
-    .forEach(id => { document.getElementById(id).style.display = 'none'; });
-  ['buyer-name','buyer-email','checkout-trial-tiktok']
+  document.getElementById('checkout-step-2').style.display = 'none';
+  ['buyer-name','buyer-email']
     .forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
-  const extraDay = document.getElementById('checkout-trial-extra-day');
-  if (extraDay) extraDay.checked = false;
   selectPlan('mensual');
-  selectMethod('paypal');
   closeModal('modal-checkout');
 }
 window.cerrarYReiniciar = cerrarYReiniciar;
