@@ -56,34 +56,34 @@
     <div style="position:absolute;bottom:0;left:0;right:0;height:240px;background:linear-gradient(to top, var(--bg-primary) 0%, transparent 100%);z-index:5;pointer-events:none;"></div>
     <div style="position:absolute;top:0;right:0;bottom:0;width:120px;background:linear-gradient(to left, var(--bg-primary) 0%, transparent 100%);z-index:5;pointer-events:none;"></div>
 
-    <div class="hero-carousel-track" style="position:absolute;inset:0;">
-      <div class="hero-slide active" style="position:absolute;inset:0;opacity:1;transition:opacity 0.7s ease;overflow:hidden;">
+    <div class="hero-carousel-track" style="position:absolute;inset:0;z-index:1;pointer-events:none;">
+      <div class="hero-slide active" style="position:absolute;inset:0;opacity:1;transition:opacity 0.7s ease;overflow:hidden;pointer-events:none;">
         <img src="imagenes/banners/gamer_hero.png" alt="" style="position:absolute;inset:-20px;width:calc(100% + 40px);height:calc(100% + 40px);object-fit:cover;filter:blur(35px) brightness(0.55) saturate(1.2);transform:scale(1.1);" />
         <img src="imagenes/banners/gamer_hero.png" alt="Streamer jugando" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center center;" />
       </div>
-      <div class="hero-slide" style="position:absolute;inset:0;opacity:0;transition:opacity 0.7s ease;overflow:hidden;">
+      <div class="hero-slide" style="position:absolute;inset:0;opacity:0;transition:opacity 0.7s ease;overflow:hidden;pointer-events:none;">
         <img src="imagenes/banners/hero_slide_prueba.jpg" alt="" style="position:absolute;inset:-20px;width:calc(100% + 40px);height:calc(100% + 40px);object-fit:cover;filter:blur(35px) brightness(0.55) saturate(1.2);transform:scale(1.1);" />
-        <img src="imagenes/banners/hero_slide_prueba.jpg" alt="Prueba un día gratis" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center center;" />
+        <img src="imagenes/banners/hero_slide_prueba.jpg" alt="Prueba de un día" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center center;" />
       </div>
-      <div class="hero-slide" style="position:absolute;inset:0;opacity:0;transition:opacity 0.7s ease;overflow:hidden;">
+      <div class="hero-slide" style="position:absolute;inset:0;opacity:0;transition:opacity 0.7s ease;overflow:hidden;pointer-events:none;">
         <img src="imagenes/banners/hero_slide_creador.jpg" alt="" style="position:absolute;inset:-20px;width:calc(100% + 40px);height:calc(100% + 40px);object-fit:cover;filter:blur(35px) brightness(0.55) saturate(1.2);transform:scale(1.1);" />
         <img src="imagenes/banners/hero_slide_creador.jpg" alt="Sé un creador" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center center;" />
       </div>
-      <div class="hero-slide" style="position:absolute;inset:0;opacity:0;transition:opacity 0.7s ease;overflow:hidden;">
+      <div class="hero-slide" style="position:absolute;inset:0;opacity:0;transition:opacity 0.7s ease;overflow:hidden;pointer-events:none;">
         <img src="imagenes/banners/hero_slide_carreritas.jpg" alt="" style="position:absolute;inset:-20px;width:calc(100% + 40px);height:calc(100% + 40px);object-fit:cover;filter:blur(35px) brightness(0.55) saturate(1.2);transform:scale(1.1);" />
         <img src="imagenes/banners/hero_slide_carreritas.jpg" alt="Carreritas — Próximamente" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center center;" />
       </div>
     </div>
 
     <div style="position:absolute;bottom:64px;left:50%;transform:translateX(-50%);z-index:7;display:flex;align-items:center;gap:14px;pointer-events:auto;">
-      <button class="hero-carousel-arrow" onclick="heroCarouselMove(-1)" aria-label="Anterior">‹</button>
+      <button class="hero-carousel-arrow" data-hero-arrow="-1" aria-label="Anterior">‹</button>
       <div style="display:flex;gap:8px;">
         <span class="hero-dot active" onclick="heroCarouselGoTo(0)"><i class="hero-dot-fill"></i></span>
         <span class="hero-dot" onclick="heroCarouselGoTo(1)"><i class="hero-dot-fill"></i></span>
         <span class="hero-dot" onclick="heroCarouselGoTo(2)"><i class="hero-dot-fill"></i></span>
         <span class="hero-dot" onclick="heroCarouselGoTo(3)"><i class="hero-dot-fill"></i></span>
       </div>
-      <button class="hero-carousel-arrow" onclick="heroCarouselMove(1)" aria-label="Siguiente">›</button>
+      <button class="hero-carousel-arrow" data-hero-arrow="1" aria-label="Siguiente">›</button>
     </div>
   </div>
 
@@ -392,6 +392,16 @@ function heroCarouselRestart() {
 window.heroCarouselGoTo = heroCarouselGoTo;
 window.heroCarouselMove = heroCarouselMove;
 if (heroSlides.length) heroCarouselRestart();
+
+// Refuerzo: enlazar por JS usando data-hero-arrow (más confiable que solo onclick inline)
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('[data-hero-arrow]').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      heroCarouselMove(parseInt(btn.getAttribute('data-hero-arrow'), 10));
+    });
+  });
+});
 
 const EMAILJS_PUBLIC_KEY    = 'hCji3MRPS1jUo_Evq';
 const EMAILJS_SERVICE_ID    = 'service_7nzw2z9';
