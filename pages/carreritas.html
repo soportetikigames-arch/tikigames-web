@@ -278,20 +278,21 @@
           <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
 
             <!-- PayPal -->
-            <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:6px 10px;display:flex;align-items:center;">
-              <svg width="60" height="16" viewBox="0 0 101 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:8px 14px;display:flex;align-items:center;">
+              <svg width="84" height="22" viewBox="0 0 101 27" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M11.8 1.6H5.5C5.1 1.6 4.7 1.9 4.6 2.3L2 18.8c-.1.3.2.6.5.6h3.2c.4 0 .8-.3.8-.7l.7-4.4c.1-.4.4-.7.8-.7h2.1c4.4 0 7-2.1 7.6-6.3.3-1.8 0-3.2-.8-4.2-.9-1-2.5-1.5-4.1-1.5zm.8 6.2c-.4 2.4-2.2 2.4-3.9 2.4h-1l.7-4.3c0-.3.3-.4.5-.4h.4c1.2 0 2.3 0 2.9.7.3.4.5 1 .4 1.6z" fill="#009cde"/>
                 <path d="M32.5 7.7h-3.2c-.3 0-.5.2-.5.4l-.1.9-.2-.3c-.7-1-2.1-1.3-3.6-1.3-3.4 0-6.3 2.6-6.9 6.2-.3 1.8.1 3.5 1.1 4.7 1 1.1 2.3 1.5 3.9 1.5 2.7 0 4.2-1.7 4.2-1.7l-.1.9c-.1.3.2.6.5.6h2.9c.4 0 .8-.3.8-.7l1.7-10.5c.1-.3-.2-.7-.5-.7zm-4.5 6c-.3 1.8-1.7 3-3.5 3-.9 0-1.6-.3-2.1-.8-.4-.6-.6-1.4-.5-2.2.3-1.8 1.7-3 3.5-3 .9 0 1.6.3 2.1.9.5.5.6 1.3.5 2.1z" fill="#009cde"/>
                 <path d="M50.7 7.7h-3.2c-.3 0-.6.2-.8.4l-4.6 6.8-2-6.5c-.1-.4-.5-.7-.9-.7h-3.1c-.4 0-.6.4-.5.7l3.7 10.9-3.5 4.9c-.3.4 0 .9.4.9h3.2c.3 0 .6-.2.8-.4L51.1 8.6c.2-.4-.1-.9-.4-.9z" fill="#003087"/>
                 <path d="M61.7 1.6h-6.3c-.4 0-.8.3-.8.7L52 18.8c-.1.3.2.6.5.6h3.4c.3 0 .5-.2.6-.5l.7-4.6c.1-.4.4-.7.8-.7h2.1c4.4 0 7-2.1 7.6-6.3.3-1.8 0-3.2-.8-4.2-1-1-2.5-1.5-4.2-1.5zm.8 6.2c-.4 2.4-2.2 2.4-3.9 2.4h-1l.7-4.3c0-.3.3-.4.5-.4h.5c1.2 0 2.3 0 2.9.7.3.4.4 1 .3 1.6z" fill="#003087"/>
+                <path d="M82.5 7.7h-3.2c-.3 0-.5.2-.5.4l-.1.9-.2-.3c-.7-1-2.1-1.3-3.6-1.3-3.4 0-6.3 2.6-6.9 6.2-.3 1.8.1 3.5 1.1 4.7 1 1.1 2.3 1.5 3.9 1.5 2.7 0 4.2-1.7 4.2-1.7l-.1.9c-.1.3.2.6.5.6h2.9c.4 0 .8-.3.8-.7l1.7-10.5c.1-.3-.2-.7-.5-.7zm-4.5 6c-.3 1.8-1.7 3-3.5 3-.9 0-1.6-.3-2.1-.8-.5-.6-.6-1.4-.5-2.2.3-1.8 1.7-3 3.5-3 .9 0 1.6.3 2.1.9.5.5.6 1.3.5 2.1z" fill="#003087"/>
                 <path d="M86.5 2.1l-2.6 16.7c-.1.3.2.6.5.6h2.8c.4 0 .8-.3.8-.7L90.6 2c.1-.3-.2-.6-.5-.6h-3.1c-.3 0-.5.3-.5.7z" fill="#003087"/>
               </svg>
             </div>
 
-            <!-- Nequi -->
-            <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:6px 12px;display:flex;align-items:center;">
-              <span style="color:#ff2e93;font-size:14px;font-weight:800;font-family:'Rajdhani',sans-serif;letter-spacing:0.5px;white-space:nowrap;">nequi</span>
-            </div>
+            <!-- Nequi (clicable) -->
+            <button type="button" onclick="mostrarInfoNequi()" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:8px 18px;display:flex;align-items:center;cursor:pointer;transition:var(--transition);" onmouseover="this.style.borderColor='#ff2e93'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'">
+              <span style="color:#ff2e93;font-size:18px;font-weight:800;font-family:'Rajdhani',sans-serif;letter-spacing:0.5px;white-space:nowrap;">nequi</span>
+            </button>
 
           </div>
           <p style="font-size:11px;color:var(--text-dim);margin-top:10px;line-height:1.5;">¿Prefieres transferencia bancaria? Escríbenos a <a href="mailto:soporte.tikigames@gmail.com" style="color:var(--cyan);">soporte.tikigames@gmail.com</a></p>
@@ -384,10 +385,10 @@
       <!-- Logos pago -->
       <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:10px;padding:10px;background:var(--bg-card);border-radius:var(--radius-sm);">
         <span style="font-size:11px;color:var(--text-dim);margin-right:4px;">Pago seguro:</span>
-        <svg width="50" height="14" viewBox="0 0 101 27" fill="none"><path d="M11.8 1.6H5.5C5.1 1.6 4.7 1.9 4.6 2.3L2 18.8c-.1.3.2.6.5.6h3.2c.4 0 .8-.3.8-.7l.7-4.4c.1-.4.4-.7.8-.7h2.1c4.4 0 7-2.1 7.6-6.3.3-1.8 0-3.2-.8-4.2-.9-1-2.5-1.5-4.1-1.5zm.8 6.2c-.4 2.4-2.2 2.4-3.9 2.4h-1l.7-4.3c0-.3.3-.4.5-.4h.4c1.2 0 2.3 0 2.9.7.3.4.5 1 .4 1.6z" fill="#009cde"/><path d="M32.5 7.7h-3.2c-.3 0-.5.2-.5.4l-.1.9-.2-.3c-.7-1-2.1-1.3-3.6-1.3-3.4 0-6.3 2.6-6.9 6.2-.3 1.8.1 3.5 1.1 4.7 1 1.1 2.3 1.5 3.9 1.5 2.7 0 4.2-1.7 4.2-1.7l-.1.9c-.1.3.2.6.5.6h2.9c.4 0 .8-.3.8-.7l1.7-10.5c.1-.3-.2-.7-.5-.7zm-4.5 6c-.3 1.8-1.7 3-3.5 3-.9 0-1.6-.3-2.1-.8-.4-.6-.6-1.4-.5-2.2.3-1.8 1.7-3 3.5-3 .9 0 1.6.3 2.1.9.5.5.6 1.3.5 2.1z" fill="#009cde"/><path d="M50.7 7.7h-3.2c-.3 0-.6.2-.8.4l-4.6 6.8-2-6.5c-.1-.4-.5-.7-.9-.7h-3.1c-.4 0-.6.4-.5.7l3.7 10.9-3.5 4.9c-.3.4 0 .9.4.9h3.2c.3 0 .6-.2.8-.4L51.1 8.6c.2-.4-.1-.9-.4-.9z" fill="#003087"/><path d="M61.7 1.6h-6.3c-.4 0-.8.3-.8.7L52 18.8c-.1.3.2.6.5.6h3.4c.3 0 .5-.2.6-.5l.7-4.6c.1-.4.4-.7.8-.7h2.1c4.4 0 7-2.1 7.6-6.3.3-1.8 0-3.2-.8-4.2-1-1-2.5-1.5-4.2-1.5zm.8 6.2c-.4 2.4-2.2 2.4-3.9 2.4h-1l.7-4.3c0-.3.3-.4.5-.4h.5c1.2 0 2.3 0 2.9.7.3.4.4 1 .3 1.6z" fill="#003087"/><path d="M86.5 2.1l-2.6 16.7c-.1.3.2.6.5.6h2.8c.4 0 .8-.3.8-.7L90.6 2c.1-.3-.2-.6-.5-.6h-3.1c-.3 0-.5.3-.5.7z" fill="#003087"/></svg>
-        <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:4px 10px;display:flex;align-items:center;">
-          <span style="color:#ff2e93;font-size:13px;font-weight:800;font-family:'Rajdhani',sans-serif;">nequi</span>
-        </div>
+        <svg width="70" height="19" viewBox="0 0 101 27" fill="none"><path d="M11.8 1.6H5.5C5.1 1.6 4.7 1.9 4.6 2.3L2 18.8c-.1.3.2.6.5.6h3.2c.4 0 .8-.3.8-.7l.7-4.4c.1-.4.4-.7.8-.7h2.1c4.4 0 7-2.1 7.6-6.3.3-1.8 0-3.2-.8-4.2-.9-1-2.5-1.5-4.1-1.5zm.8 6.2c-.4 2.4-2.2 2.4-3.9 2.4h-1l.7-4.3c0-.3.3-.4.5-.4h.4c1.2 0 2.3 0 2.9.7.3.4.5 1 .4 1.6z" fill="#009cde"/><path d="M32.5 7.7h-3.2c-.3 0-.5.2-.5.4l-.1.9-.2-.3c-.7-1-2.1-1.3-3.6-1.3-3.4 0-6.3 2.6-6.9 6.2-.3 1.8.1 3.5 1.1 4.7 1 1.1 2.3 1.5 3.9 1.5 2.7 0 4.2-1.7 4.2-1.7l-.1.9c-.1.3.2.6.5.6h2.9c.4 0 .8-.3.8-.7l1.7-10.5c.1-.3-.2-.7-.5-.7zm-4.5 6c-.3 1.8-1.7 3-3.5 3-.9 0-1.6-.3-2.1-.8-.4-.6-.6-1.4-.5-2.2.3-1.8 1.7-3 3.5-3 .9 0 1.6.3 2.1.9.5.5.6 1.3.5 2.1z" fill="#009cde"/><path d="M50.7 7.7h-3.2c-.3 0-.6.2-.8.4l-4.6 6.8-2-6.5c-.1-.4-.5-.7-.9-.7h-3.1c-.4 0-.6.4-.5.7l3.7 10.9-3.5 4.9c-.3.4 0 .9.4.9h3.2c.3 0 .6-.2.8-.4L51.1 8.6c.2-.4-.1-.9-.4-.9z" fill="#003087"/><path d="M61.7 1.6h-6.3c-.4 0-.8.3-.8.7L52 18.8c-.1.3.2.6.5.6h3.4c.3 0 .5-.2.6-.5l.7-4.6c.1-.4.4-.7.8-.7h2.1c4.4 0 7-2.1 7.6-6.3.3-1.8 0-3.2-.8-4.2-1-1-2.5-1.5-4.2-1.5zm.8 6.2c-.4 2.4-2.2 2.4-3.9 2.4h-1l.7-4.3c0-.3.3-.4.5-.4h.5c1.2 0 2.3 0 2.9.7.3.4.4 1 .3 1.6z" fill="#003087"/><path d="M82.5 7.7h-3.2c-.3 0-.5.2-.5.4l-.1.9-.2-.3c-.7-1-2.1-1.3-3.6-1.3-3.4 0-6.3 2.6-6.9 6.2-.3 1.8.1 3.5 1.1 4.7 1 1.1 2.3 1.5 3.9 1.5 2.7 0 4.2-1.7 4.2-1.7l-.1.9c-.1.3.2.6.5.6h2.9c.4 0 .8-.3.8-.7l1.7-10.5c.1-.3-.2-.7-.5-.7zm-4.5 6c-.3 1.8-1.7 3-3.5 3-.9 0-1.6-.3-2.1-.8-.5-.6-.6-1.4-.5-2.2.3-1.8 1.7-3 3.5-3 .9 0 1.6.3 2.1.9.5.5.6 1.3.5 2.1z" fill="#003087"/><path d="M86.5 2.1l-2.6 16.7c-.1.3.2.6.5.6h2.8c.4 0 .8-.3.8-.7L90.6 2c.1-.3-.2-.6-.5-.6h-3.1c-.3 0-.5.3-.5.7z" fill="#003087"/></svg>
+        <button type="button" onclick="mostrarInfoNequi()" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:6px 14px;display:flex;align-items:center;cursor:pointer;transition:var(--transition);" onmouseover="this.style.borderColor='#ff2e93'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'">
+          <span style="color:#ff2e93;font-size:16px;font-weight:800;font-family:'Rajdhani',sans-serif;">nequi</span>
+        </button>
       </div>
       <p style="font-size:11px;color:var(--text-dim);margin-bottom:16px;line-height:1.5;">¿Prefieres transferencia bancaria? Escríbenos a <a href="mailto:soporte.tikigames@gmail.com" style="color:var(--cyan);">soporte.tikigames@gmail.com</a></p>
 
@@ -409,6 +410,32 @@
       <button class="btn btn-outline" style="margin:0 auto;" onclick="cerrarYReiniciar()">Cerrar</button>
     </div>
 
+  </div>
+</div>
+
+<!-- MODAL NEQUI -->
+<div class="modal-overlay" id="modal-nequi">
+  <div class="modal" style="max-width:420px;">
+    <button class="modal-close" onclick="closeModal('modal-nequi')">✕</button>
+    <div style="text-align:center;">
+      <div style="width:64px;height:64px;border-radius:50%;background:rgba(255,46,147,0.1);border:2px solid #ff2e93;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;">
+        <span style="color:#ff2e93;font-size:22px;font-weight:800;font-family:'Rajdhani',sans-serif;">N</span>
+      </div>
+      <h2 style="color:#ff2e93;margin-bottom:8px;">Paga con Nequi</h2>
+      <p style="color:var(--text-gray);line-height:1.7;margin-bottom:20px;font-size:14px;">
+        Puedes hacer tu transferencia por Nequi directamente a este número:
+      </p>
+      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;margin-bottom:20px;">
+        <div style="font-family:'Orbitron',monospace;font-size:24px;font-weight:700;color:#ff2e93;letter-spacing:1px;">301 464 2249</div>
+      </div>
+      <p style="color:var(--text-gray);line-height:1.7;margin-bottom:20px;font-size:13px;">
+        Una vez hagas la transferencia, envía tu comprobante junto con tu nombre a este mismo número por Nequi, o directamente al correo:
+      </p>
+      <div style="background:rgba(0,240,255,0.06);border:1px solid rgba(0,240,255,0.2);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:20px;">
+        <a href="mailto:soporte.tikigames@gmail.com" style="color:var(--cyan);font-weight:700;font-size:14px;">soporte.tikigames@gmail.com</a>
+      </div>
+      <button class="btn btn-outline" style="margin:0 auto;" onclick="closeModal('modal-nequi')">Entendido</button>
+    </div>
   </div>
 </div>
 
@@ -534,6 +561,11 @@ carouselEl.addEventListener('touchstart', e => { touchStartX = e.touches[0].clie
 carouselEl.addEventListener('touchend',   e => { const diff = touchStartX - e.changedTouches[0].clientX; if (Math.abs(diff) > 40) moveCarousel(diff > 0 ? 1 : -1); });
 
 // ─── Abrir checkout con un plan preseleccionado ──
+function mostrarInfoNequi() {
+  openModal('modal-nequi');
+}
+window.mostrarInfoNequi = mostrarInfoNequi;
+
 function abrirCheckoutConPlan(plan) {
   openModal('modal-checkout');
   setTimeout(() => { selectPlan(plan); }, 200);
@@ -574,8 +606,8 @@ function selectPlan(plan) {
 // ─── Botones oficiales de PayPal (Hosted Buttons) ──
 // ⚠️ PENDIENTE: reemplazar estos 2 IDs por los reales cuando Laura los cree en PayPal
 // (PayPal → Herramientas para empresas → Botones de pago → crear uno de $35 y otro de $2)
-const PAYPAL_BUTTON_ID_PERMANENTE = 'TU_ID_PERMANENTE_CARRERITAS';
-const PAYPAL_BUTTON_ID_PRUEBA     = 'TU_ID_PRUEBA_CARRERITAS';
+const PAYPAL_BUTTON_ID_PERMANENTE = 'T2LLY6LPV7MNU';
+const PAYPAL_BUTTON_ID_PRUEBA     = 'EQ3T8J2UMKR6G';
 
 function renderPayPalButtons() {
   if (typeof paypal === 'undefined') return;
