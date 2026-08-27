@@ -75,21 +75,23 @@
       </div>
     </div>
 
-    <div style="position:absolute;bottom:64px;left:50%;transform:translateX(-50%);z-index:7;display:flex;align-items:center;gap:14px;pointer-events:auto;">
-      <button class="hero-carousel-arrow" data-hero-arrow="-1" aria-label="Anterior">‹</button>
-      <div style="display:flex;gap:8px;">
-        <span class="hero-dot active" onclick="heroCarouselGoTo(0)"><i class="hero-dot-fill"></i></span>
-        <span class="hero-dot" onclick="heroCarouselGoTo(1)"><i class="hero-dot-fill"></i></span>
-        <span class="hero-dot" onclick="heroCarouselGoTo(2)"><i class="hero-dot-fill"></i></span>
-        <span class="hero-dot" onclick="heroCarouselGoTo(3)"><i class="hero-dot-fill"></i></span>
-      </div>
-      <button class="hero-carousel-arrow" data-hero-arrow="1" aria-label="Siguiente">›</button>
+  </div>
+
+  <!-- Controles del carrusel — fuera del wrap, z-index:20 para quedar SIEMPRE encima del contenido -->
+  <div style="position:absolute;bottom:64px;right:29%;transform:translateX(50%);z-index:20;display:flex;align-items:center;gap:14px;pointer-events:auto;">
+    <button type="button" class="hero-carousel-arrow" data-hero-arrow="-1" aria-label="Anterior">‹</button>
+    <div style="display:flex;gap:8px;">
+      <span class="hero-dot active" onclick="heroCarouselGoTo(0)"><i class="hero-dot-fill"></i></span>
+      <span class="hero-dot" onclick="heroCarouselGoTo(1)"><i class="hero-dot-fill"></i></span>
+      <span class="hero-dot" onclick="heroCarouselGoTo(2)"><i class="hero-dot-fill"></i></span>
+      <span class="hero-dot" onclick="heroCarouselGoTo(3)"><i class="hero-dot-fill"></i></span>
     </div>
+    <button type="button" class="hero-carousel-arrow" data-hero-arrow="1" aria-label="Siguiente">›</button>
   </div>
 
   <!-- Contenido — z-index:10, siempre encima de la imagen -->
-  <div style="position:relative;z-index:10;max-width:1400px;margin:0 auto;padding:80px 40px;width:100%;">
-    <div style="max-width:min(580px, 50%);">
+  <div style="position:relative;z-index:10;max-width:1400px;margin:0 auto;padding:80px 40px;width:100%;pointer-events:none;">
+    <div style="max-width:min(580px, 50%);pointer-events:auto;">
 
       <h1 id="hero-h1" class="fade-in-up delay-2" style="font-family:'Orbitron',monospace;font-size:clamp(32px,5.5vw,80px);font-weight:900;line-height:1.0;margin-bottom:12px;letter-spacing:-1px;">
         JUEGA. COMPITE. GANA.
@@ -393,14 +395,13 @@ window.heroCarouselGoTo = heroCarouselGoTo;
 window.heroCarouselMove = heroCarouselMove;
 if (heroSlides.length) heroCarouselRestart();
 
-// Refuerzo: enlazar por JS usando data-hero-arrow (más confiable que solo onclick inline)
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('[data-hero-arrow]').forEach((btn) => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      heroCarouselMove(parseInt(btn.getAttribute('data-hero-arrow'), 10));
-    });
-  });
+// Refuerzo: delegación de eventos en document — funciona aunque el botón se re-renderice
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('[data-hero-arrow]');
+  if (!btn) return;
+  e.preventDefault();
+  e.stopPropagation();
+  heroCarouselMove(parseInt(btn.getAttribute('data-hero-arrow'), 10));
 });
 
 const EMAILJS_PUBLIC_KEY    = 'hCji3MRPS1jUo_Evq';
