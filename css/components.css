@@ -631,3 +631,8 @@
   .btn-lg { padding: 14px 24px; font-size: 15px; }
   .modal { width: 95%; }
 }
+
+/* ─── Videos de la comunidad (páginas de juego) ─── */
+@media (max-width: 768px) {
+  .tk-videos-grid { grid-template-columns: 1fr !important; }
+}
