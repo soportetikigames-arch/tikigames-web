@@ -633,8 +633,12 @@
 }
 
 /* ─── Videos de la comunidad (páginas de juego) ─── */
+/* ─── Rejilla de videos de la comunidad ─── */
+.tk-videos-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px; width: 100%; max-width: 620px; margin: 0 auto; }
+.tk-videos-grid > div { min-width: 0; }
 @media (max-width: 768px) {
-  .tk-videos-grid { grid-template-columns: 1fr !important; max-width: 340px !important; }
+  .tk-videos-grid { grid-template-columns: minmax(0, 1fr); max-width: 320px; }
 }
 
 /* ─── Reproductor de videos con overlay de play/replay ─── */
