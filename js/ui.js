@@ -56,7 +56,6 @@ window.toggleFaq = toggleFaq;
 /* ─── Videos de la comunidad: play/pausa central + repetir al finalizar ─── */
 (function () {
   var ICON_PLAY   = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
-  var ICON_PAUSE  = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>';
   var ICON_REPLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>';
 
   function init() {
@@ -69,33 +68,15 @@ window.toggleFaq = toggleFaq;
       var icon  = overlay.querySelector('.tk-video-icon');
       var label = overlay.querySelector('.tk-video-label');
 
-      // Destello de play/pausa al pulsar el centro durante la reproducción
-      var flash = document.createElement('div');
-      flash.className = 'tk-video-flash';
-      flash.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);' +
-        'width:74px;height:74px;border-radius:50%;background:rgba(10,10,15,0.7);' +
-        'border:2px solid var(--cyan);display:flex;align-items:center;justify-content:center;' +
-        'opacity:0;pointer-events:none;';
-      box.appendChild(flash);
-
-      function destello(svg) {
-        flash.innerHTML = svg;
-        flash.classList.remove('show');
-        void flash.offsetWidth;   // reinicia la animación
-        flash.classList.add('show');
-      }
-
-      function mostrarOverlay(modoReplay) {
+      // Un ÚNICO indicador en el centro. Nunca se muestran dos a la vez.
+      function mostrar(modoReplay) {
         icon.innerHTML = modoReplay ? ICON_REPLAY : ICON_PLAY;
         overlay.classList.toggle('is-replay', !!modoReplay);
         overlay.setAttribute('aria-label', modoReplay ? 'Ver de nuevo' : 'Reproducir video');
         if (label) label.hidden = !modoReplay;
-        overlay.style.display = 'flex';   // gana a cualquier estilo en línea
+        overlay.style.display = 'flex';
       }
-
-      function ocultarOverlay() {
-        overlay.style.display = 'none';
-      }
+      function ocultar() { overlay.style.display = 'none'; }
 
       function reproducir() {
         if (video.ended) video.currentTime = 0;
@@ -103,30 +84,26 @@ window.toggleFaq = toggleFaq;
         if (r && r.catch) r.catch(function () {});
       }
 
+      // Clic en el botón central → reanuda o reinicia
       overlay.addEventListener('click', function (e) {
         e.preventDefault();
+        e.stopPropagation();
         reproducir();
       });
 
-      // Clic en el centro del video mientras se reproduce → pausa (y viceversa)
+      // Clic sobre el video mientras corre → pausa
       video.addEventListener('click', function () {
-        if (video.paused || video.ended) {
-          reproducir();
-          destello(ICON_PLAY);
-        } else {
-          video.pause();
-          destello(ICON_PAUSE);
-        }
+        if (video.paused || video.ended) reproducir();
+        else video.pause();
       });
 
-      video.addEventListener('play',  ocultarOverlay);
-      video.addEventListener('playing', ocultarOverlay);
-      video.addEventListener('pause', function () {
-        if (!video.ended) mostrarOverlay(false);
-      });
-      video.addEventListener('ended', function () { mostrarOverlay(true); });
+      // El estado del video es la única fuente de verdad del indicador
+      video.addEventListener('play',    ocultar);
+      video.addEventListener('playing', ocultar);
+      video.addEventListener('pause',   function () { if (!video.ended) mostrar(false); });
+      video.addEventListener('ended',   function () { mostrar(true); });
 
-      mostrarOverlay(false);
+      mostrar(false);
     });
   }
 
