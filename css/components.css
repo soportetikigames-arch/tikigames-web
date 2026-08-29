@@ -634,5 +634,5 @@
 
 /* ─── Videos de la comunidad (páginas de juego) ─── */
 @media (max-width: 768px) {
-  .tk-videos-grid { grid-template-columns: 1fr !important; }
+  .tk-videos-grid { grid-template-columns: 1fr !important; max-width: 340px !important; }
 }
