@@ -636,3 +636,27 @@
 @media (max-width: 768px) {
   .tk-videos-grid { grid-template-columns: 1fr !important; max-width: 340px !important; }
 }
+
+/* ─── Reproductor de videos con overlay de play/replay ─── */
+.tk-video-box { position: relative; width: 100%; padding-top: 177.78%; background: #0a0a0f;
+  border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+.tk-video-box video { position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; background: #0a0a0f; }
+.tk-video-overlay { position: absolute; inset: 0; display: flex; align-items: center;
+  justify-content: center; cursor: pointer; background: rgba(10,10,15,0.35);
+  transition: opacity 0.25s, background 0.25s; border: 0; padding: 0; }
+.tk-video-overlay[hidden] { display: none; }
+.tk-video-overlay:hover { background: rgba(10,10,15,0.15); }
+.tk-video-icon { width: 74px; height: 74px; border-radius: 50%;
+  background: rgba(10,10,15,0.7); border: 2px solid var(--cyan);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 22px rgba(0,240,255,0.35); transition: transform 0.25s, box-shadow 0.25s; }
+.tk-video-overlay:hover .tk-video-icon { transform: scale(1.09);
+  box-shadow: 0 0 32px rgba(0,240,255,0.6); }
+.tk-video-icon svg { width: 34px; height: 34px; fill: var(--cyan); }
+.tk-video-overlay.is-replay .tk-video-icon { border-color: var(--red);
+  box-shadow: 0 0 22px rgba(255,0,80,0.4); }
+.tk-video-overlay.is-replay .tk-video-icon svg { fill: var(--red); }
+.tk-video-label { position: absolute; bottom: 18%; left: 0; right: 0; text-align: center;
+  font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; font-size: 13px; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.8); }

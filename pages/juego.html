@@ -8,9 +8,16 @@
   <link rel="stylesheet" href="../css/navbar.css" />
   <link rel="stylesheet" href="../css/components.css" />
   <link rel="stylesheet" href="../css/animations.css" />
+  <link rel="icon" href="../favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" href="../imagenes/logo/favicon.png" />
   <link rel="apple-touch-icon" href="../imagenes/logo/apple-touch-icon.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://tikigames.shop/pages/juego.html" />
   <meta property="og:image" content="https://tikigames.shop/imagenes/logo/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://tikigames.shop/imagenes/logo/og-image.png" />
   <!-- PayPal SDK (Hosted Buttons) -->
   <script src="https://www.paypal.com/sdk/js?client-id=BAAz58YwiFdik4ODXr981asRsD709m_V4FUxgD73zckbYDBFHeUBKeJVZ8aWYMRHktTETWWhmEMKAz3zz8&components=hosted-buttons&disable-funding=venmo&currency=USD"></script>
   <!-- EmailJS (envío automático de correos) -->
@@ -185,23 +192,29 @@
         <div class="tk-videos-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:760px;margin:0 auto;">
 
           <div>
-            <div style="position:relative;width:100%;padding-top:177.78%;background:#0a0a0f;border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;">
-              <video controls preload="none" playsinline poster="../imagenes/banners/poster_mundialito_1.jpg"
-                     style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#0a0a0f;">
+            <div class="tk-video-box">
+              <video preload="none" playsinline controls poster="../imagenes/banners/poster_mundialito_1.jpg">
                 <source src="../videos/mundialito_1.mp4" type="video/mp4" />
                 Tu navegador no puede reproducir este video.
               </video>
+              <button type="button" class="tk-video-overlay" aria-label="Reproducir video">
+                <span class="tk-video-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+                <span class="tk-video-label" hidden>Ver de nuevo</span>
+              </button>
             </div>
-            <div style="color:var(--text-dim);font-size:13px;margin-top:10px;text-align:center;line-height:1.5;">Un torneo completo, fase por fase, en vivo.</div>
+            <div style="color:var(--text-dim);font-size:13px;margin-top:10px;text-align:center;line-height:1.5;">Así se vive un torneo en vivo con la comunidad.</div>
           </div>
 
           <div>
-            <div style="position:relative;width:100%;padding-top:177.78%;background:#0a0a0f;border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;">
-              <video controls preload="none" playsinline poster="../imagenes/banners/poster_mundialito_2.jpg"
-                     style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#0a0a0f;">
+            <div class="tk-video-box">
+              <video preload="none" playsinline controls poster="../imagenes/banners/poster_mundialito_2.jpg">
                 <source src="../videos/mundialito_2.mp4" type="video/mp4" />
                 Tu navegador no puede reproducir este video.
               </video>
+              <button type="button" class="tk-video-overlay" aria-label="Reproducir video">
+                <span class="tk-video-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+                <span class="tk-video-label" hidden>Ver de nuevo</span>
+              </button>
             </div>
             <div style="color:var(--text-dim);font-size:13px;margin-top:10px;text-align:center;line-height:1.5;">El gol que hizo estallar la transmisión.</div>
           </div>

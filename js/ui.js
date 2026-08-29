@@ -53,3 +53,42 @@ if (arrow) arrow.style.transform = 'rotate(180deg)';
 }
 }
 window.toggleFaq = toggleFaq;
+/* ─── Videos de la comunidad: play central + repetir al finalizar ─── */
+(function () {
+  var ICON_PLAY   = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+  var ICON_REPLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>';
+
+  function init() {
+    document.querySelectorAll('.tk-video-box').forEach(function (box) {
+      var video   = box.querySelector('video');
+      var overlay = box.querySelector('.tk-video-overlay');
+      if (!video || !overlay) return;
+      var icon  = overlay.querySelector('.tk-video-icon');
+      var label = overlay.querySelector('.tk-video-label');
+
+      function mostrar(modoReplay) {
+        icon.innerHTML = modoReplay ? ICON_REPLAY : ICON_PLAY;
+        overlay.classList.toggle('is-replay', !!modoReplay);
+        overlay.setAttribute('aria-label', modoReplay ? 'Ver de nuevo' : 'Reproducir video');
+        if (label) label.hidden = !modoReplay;
+        overlay.hidden = false;
+      }
+
+      overlay.addEventListener('click', function () {
+        if (video.ended) video.currentTime = 0;
+        var r = video.play();
+        if (r && r.catch) r.catch(function () {});
+      });
+
+      video.addEventListener('play',  function () { overlay.hidden = true; });
+      video.addEventListener('pause', function () { if (!video.ended) mostrar(false); });
+      video.addEventListener('ended', function () { mostrar(true); });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
