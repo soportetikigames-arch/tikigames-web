@@ -53,36 +53,80 @@ if (arrow) arrow.style.transform = 'rotate(180deg)';
 }
 }
 window.toggleFaq = toggleFaq;
-/* ─── Videos de la comunidad: play central + repetir al finalizar ─── */
+/* ─── Videos de la comunidad: play/pausa central + repetir al finalizar ─── */
 (function () {
   var ICON_PLAY   = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+  var ICON_PAUSE  = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>';
   var ICON_REPLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>';
 
   function init() {
     document.querySelectorAll('.tk-video-box').forEach(function (box) {
       var video   = box.querySelector('video');
       var overlay = box.querySelector('.tk-video-overlay');
-      if (!video || !overlay) return;
+      if (!video || !overlay || box.dataset.tkReady) return;
+      box.dataset.tkReady = '1';
+
       var icon  = overlay.querySelector('.tk-video-icon');
       var label = overlay.querySelector('.tk-video-label');
 
-      function mostrar(modoReplay) {
+      // Destello de play/pausa al pulsar el centro durante la reproducción
+      var flash = document.createElement('div');
+      flash.className = 'tk-video-flash';
+      flash.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);' +
+        'width:74px;height:74px;border-radius:50%;background:rgba(10,10,15,0.7);' +
+        'border:2px solid var(--cyan);display:flex;align-items:center;justify-content:center;' +
+        'opacity:0;pointer-events:none;';
+      box.appendChild(flash);
+
+      function destello(svg) {
+        flash.innerHTML = svg;
+        flash.classList.remove('show');
+        void flash.offsetWidth;   // reinicia la animación
+        flash.classList.add('show');
+      }
+
+      function mostrarOverlay(modoReplay) {
         icon.innerHTML = modoReplay ? ICON_REPLAY : ICON_PLAY;
         overlay.classList.toggle('is-replay', !!modoReplay);
         overlay.setAttribute('aria-label', modoReplay ? 'Ver de nuevo' : 'Reproducir video');
         if (label) label.hidden = !modoReplay;
-        overlay.hidden = false;
+        overlay.style.display = 'flex';   // gana a cualquier estilo en línea
       }
 
-      overlay.addEventListener('click', function () {
+      function ocultarOverlay() {
+        overlay.style.display = 'none';
+      }
+
+      function reproducir() {
         if (video.ended) video.currentTime = 0;
         var r = video.play();
         if (r && r.catch) r.catch(function () {});
+      }
+
+      overlay.addEventListener('click', function (e) {
+        e.preventDefault();
+        reproducir();
       });
 
-      video.addEventListener('play',  function () { overlay.hidden = true; });
-      video.addEventListener('pause', function () { if (!video.ended) mostrar(false); });
-      video.addEventListener('ended', function () { mostrar(true); });
+      // Clic en el centro del video mientras se reproduce → pausa (y viceversa)
+      video.addEventListener('click', function () {
+        if (video.paused || video.ended) {
+          reproducir();
+          destello(ICON_PLAY);
+        } else {
+          video.pause();
+          destello(ICON_PAUSE);
+        }
+      });
+
+      video.addEventListener('play',  ocultarOverlay);
+      video.addEventListener('playing', ocultarOverlay);
+      video.addEventListener('pause', function () {
+        if (!video.ended) mostrarOverlay(false);
+      });
+      video.addEventListener('ended', function () { mostrarOverlay(true); });
+
+      mostrarOverlay(false);
     });
   }
 
